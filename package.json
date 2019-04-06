@@ -1,0 +1,103 @@
+{
+  "name": "fe-courses",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gabriel Mayta",
+    "email": "grandemayta@gmail.com"
+  },
+  "scripts": {
+    "pretest": "eslint . --fix",
+    "precommit": "lint-staged",
+    "start": "cross-env NODE_ENV=local webpack-dev-server --config scripts/webpack.local.js",
+    "dev": "yarn && cross-env NODE_ENV=dev webpack --config scripts/webpack.dev.js && yarn dev:legacy",
+    "dev:legacy": "cross-env NODE_ENV=dev webpack --config scripts/webpack.dev.js",
+    "prod": "yarn && cross-env NODE_ENV=prod webpack --config scripts/webpack.prod.js && yarn prod:legacy",
+    "prod:legacy": "cross-env NODE_ENV=prod webpack --config scripts/webpack.prod.js",
+    "analyse": "cross-env NODE_ENV=prod webpack --config scripts/webpack.analyse.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "e2e": "cypress open",
+    "docs": "documentation readme ./src/** --section=Docs"
+  },
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "core-js": "^2.5.7",
+    "custom-event-polyfill": "^1.0.6",
+    "element-closest": "^3.0.1",
+    "intersection-observer": "^0.5.1",
+    "lit-html": "^1.0.0",
+    "navigo": "^7.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/runtime": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.2",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.4",
+    "css-loader": "^1.0.0",
+    "cypress": "^3.1.0",
+    "documentation": "^6.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-xo": "^0.20.1",
+    "eslint-plugin-cypress": "^2.0.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.7.0",
+    "fetch-mock": "^6.3.0",
+    "file-loader": "^1.1.11",
+    "fs": "^0.0.1-security",
+    "html-webpack-plugin": "^3.0.6",
+    "husky": "^0.14.3",
+    "jest": "^23.6.0",
+    "jest-file": "^1.0.0",
+    "lint-staged": "^7.0.0",
+    "node-fetch": "^2.1.2",
+    "node-sass": "^4.7.2",
+    "path": "^0.12.7",
+    "prettier": "^1.12.0",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.17.2",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-merge": "^4.1.1",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "config$": "<rootDir>/config/config.jest.js",
+      "src(.*)$": "<rootDir>/src/$1",
+      "assets(.*)$": "<rootDir>/src/assets/$1"
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.(scss|jpg|png|gif|eot|woff|ttf|svg)$": "jest-file"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js}",
+      "!src/**/index.{js}",
+      "!src/**/polyfills.{js}",
+      "!src/**/*.{e2e.js}"
+    ],
+    "verbose": true
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn pretest",
+      "git add"
+    ]
+  },
+  "license": "MIT"
+}

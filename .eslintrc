@@ -1,0 +1,30 @@
+{
+  "extends": ["xo", "prettier"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "printWidth": 90
+      }
+    ]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "globals": {
+    "cy": true
+  },
+  "plugins": [
+    "prettier",
+    "cypress"
+  ]
+}
