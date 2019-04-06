@@ -1,6 +1,3 @@
-import Router from './router/router';
-import './components';
-
 if (
   // OTHERS
   'Symbol' in window &&
@@ -34,6 +31,5 @@ if (
 }
 
 function bootstrap() {
-  const { default: routes } = require('./routes');
-  new Router().bootstrap(routes);
+  module.exports = require('core/bootstrap');
 }

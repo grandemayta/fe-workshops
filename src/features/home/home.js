@@ -1,10 +1,10 @@
 import { html, render } from 'lit-html';
-import Router from '../../router/router';
+import Router from 'core/router';
 import 'features/home/home.scss';
 
 export default class Home {
-  constructor(selector) {
-    this.myEl = document.querySelector(selector);
+  constructor(el) {
+    this.el = el;
     this.router = new Router();
   }
 
@@ -19,7 +19,7 @@ export default class Home {
     `;
   }
 
-  render() {
-    render(this.template(), this.myEl);
+  load() {
+    render(this.template(), this.el);
   }
 }

@@ -18,6 +18,7 @@ export default class CardComponent extends HTMLElement {
 
   constructor() {
     super();
+    this.attachShadow({ mode: 'open' });
     this.data = {
       title: this.title,
       link: this.link,
@@ -44,7 +45,7 @@ export default class CardComponent extends HTMLElement {
 
   connectedCallback() {
     console.log('Card Component Inserted');
-    render(this.template(), this);
+    render(this.template(), this.shadowRoot);
   }
 }
 

@@ -59,7 +59,11 @@ const config = {
       config: configByEnv,
       src: `${src}`,
       assets: `${src}/assets`,
-      polyfills: `${src}/polyfills`
+      core: `${src}/core`,
+      polyfills: `${src}/polyfills`,
+      utils: `${src}/utils`,
+      components: `${src}/components`,
+      features: `${src}/features`
     }
   },
   plugins: []
