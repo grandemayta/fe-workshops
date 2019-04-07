@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --font-family: 'Roboto', sans-serif;;
+    --background-primary: #ee6e73;
+    --paragraph-primary: #fff;
+}
+
+.container {
+    padding-top: 60px;
+    width: 1024px;
+    margin: 0 auto;
+}
