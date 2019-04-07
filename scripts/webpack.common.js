@@ -38,8 +38,7 @@ const config = {
           {
             loader: 'sass-loader'
           }
-        ],
-        exclude: /node_modules/
+        ]
       },
       {
         test: /\.(jpg|png|gif|eot|woff|ttf|svg)$/,

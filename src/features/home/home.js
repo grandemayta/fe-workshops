@@ -10,12 +10,12 @@ export default class Home {
 
   template() {
     return html`
-      <app-card
-        title="Start code from here with Vanilla Javascript!"
-        link="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-      >
-      </app-card>
-      <button @click=${() => this.router.go('/contacts')}>Contacts</button>
+      <app-header></app-header>
+      <div class="container">
+        <input type="text" />
+        <textarea></textarea>
+        <button>Create course</button>
+      </div>
     `;
   }
 
