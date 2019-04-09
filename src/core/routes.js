@@ -1,6 +1,9 @@
-import { loadFeature } from 'utils';
+import { page, loadFeature } from 'utils';
 
-export default {
-  '/': () => loadFeature('home'),
-  '/contacts': () => loadFeature('contacts')
+const routes = () => {
+  page('/', () => loadFeature('home'));
+  page('/contacts', () => loadFeature('contacts'));
+  page();
 };
+
+export default routes;

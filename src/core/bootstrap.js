@@ -1,6 +1,5 @@
-import Router from './router';
 import routes from './routes';
 import 'components';
-import 'style-loader!css-loader!../index.css';
+import '../index.scss';
 
-new Router().bootstrap(routes);
+document.addEventListener('DOMContentLoaded', () => routes());
