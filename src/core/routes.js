@@ -1,8 +1,8 @@
 import { page, loadFeature } from 'utils';
 
 const routes = () => {
-  page('/', () => loadFeature('home'));
-  page('/contacts', () => loadFeature('contacts'));
+  page('/', () => loadFeature('home/home'));
+  page('/courses/create', () => loadFeature('courses/create/create'));
   page();
 };
 

@@ -1,7 +1,7 @@
 import { html, render } from 'lit-html';
-import './home.scss';
+import './create.scss';
 
-export default class Home {
+export default class Create {
   constructor(el) {
     this.el = el;
   }
@@ -9,10 +9,9 @@ export default class Home {
   template() {
     return html`
       <app-header></app-header>
+      <app-sub-header title="Create a workshop"></app-sub-header>
       <div class="container">
-        <a class="button is-primary" href="/courses/create">
-          Create a Workshop
-        </a>
+        <app-create-course type="create"></app-create-course>
       </div>
     `;
   }
