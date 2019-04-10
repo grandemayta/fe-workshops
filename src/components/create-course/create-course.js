@@ -1,21 +1,29 @@
 import { html, render } from 'lit-html';
+import { getCourseById } from 'utils/http-wrapper';
 
 export default class CreateCourse extends HTMLElement {
-  get title() {
+  get type() {
     return this.getAttribute('type');
   }
 
-  connectedCallback() {
-    render(this.template(), this);
+  get id() {
+    return this.getAttribute('id');
   }
 
-  template() {
+  async connectedCallback() {
+    let data = {};
+    if (this.id) data = await getCourseById(this.id);
+    render(this.template(data), this);
+  }
+
+  template(data) {
+    const { title, description } = data;
     return html`
       <div class="columns">
         <div class="column is-half">
           <div class="field">
             <label class="label is-medium">Title</label>
-            <input class="input is-medium" placeholder="Type your title..." />
+            <input class="input is-medium" value=${title || ''} />
           </div>
         </div>
       </div>
@@ -24,10 +32,7 @@ export default class CreateCourse extends HTMLElement {
           <div class="field">
             <label class="label is-medium">Description</label>
             <div class="control">
-              <textarea
-                class="textarea is-medium"
-                placeholder="Type your description"
-              ></textarea>
+              <textarea class="textarea is-medium">${description || ''}</textarea>
             </div>
           </div>
         </div>
