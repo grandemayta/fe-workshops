@@ -8,7 +8,7 @@ export default class Detail {
   }
 
   template(data) {
-    const { title, description, author, date, time } = data;
+    const { title, description, technology, author, date, time } = data;
     return html`
       <app-header></app-header>
       <app-sub-header title="Workshop detail"></app-sub-header>
@@ -18,28 +18,15 @@ export default class Detail {
             <div class="column is-8">
               <h3 class="title is-3">${title}</h3>
               <p>${description}</p>
-              <hr />
-              <h4 class="title is-4">Detail</h4>
-              <div class="content">
-                <span class="icon">
-                  <i class="fas fa-calendar-alt"></i>
-                </span>
-                <span>${date} ${time}</span>
-              </div>
-              <article class="media custom-attendees-media">
-                <div class="media-left">
-                  <figure class="image is-64x64">
-                    <img class="is-rounded" src=${author.avatar} alt="Image" />
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <strong>${author.name}</strong>
-                    </p>
-                  </div>
-                </div>
-              </article>
+              <app-owner-course
+                name=${author.name}
+                avatar=${author.avatar}
+                role=${author.role}
+                technology=${technology}
+                date=${date}
+                time=${time}
+              >
+              </app-owner-course>
             </div>
             <div class="column is-4">
               <h4 class="title is-4">Attendees</h4>
