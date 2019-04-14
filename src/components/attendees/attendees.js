@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import { getAttendees } from 'utils/http-wrapper';
+import { getAttendeesByWorkshop } from 'utils/http-wrapper';
 import './attendees.scss';
 
 export default class Attendees extends HTMLElement {
@@ -8,7 +8,7 @@ export default class Attendees extends HTMLElement {
   }
 
   async connectedCallback() {
-    const data = await getAttendees(this.id);
+    const data = await getAttendeesByWorkshop(this.id);
     render(this.template(data), this);
   }
 
@@ -16,7 +16,7 @@ export default class Attendees extends HTMLElement {
     return html`
       <div class="box">
         ${attendees.map(attendee => {
-          const { name, avatar } = attendee;
+          const { firstname, lastname, avatar } = attendee;
           return html`
             <article class="media custom-attendees-media">
               <div class="media-left">
@@ -27,7 +27,7 @@ export default class Attendees extends HTMLElement {
               <div class="media-content">
                 <div class="content">
                   <p>
-                    <strong>${name}</strong>
+                    <strong>${firstname} ${lastname}</strong>
                   </p>
                 </div>
               </div>

@@ -10,9 +10,11 @@ export default class Update {
     return html`
       <app-header></app-header>
       <app-sub-header title="Modify your workshop"></app-sub-header>
-      <div class="container">
-        <app-create-course type="update" id=${this.params.id}></app-create-course>
-      </div>
+      <section class="main-wrapper">
+        <div class="container">
+          <app-create-course type="update" id=${this.params.id}></app-create-course>
+        </div>
+      </section>
     `;
   }
 

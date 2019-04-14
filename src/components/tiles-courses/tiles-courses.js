@@ -1,9 +1,9 @@
 import { html, render } from 'lit-html';
-import { getCourses } from 'utils/http-wrapper';
+import { getWorkshops } from 'utils/http-wrapper';
 
 export default class TilesCourses extends HTMLElement {
   async connectedCallback() {
-    const courses = this.orderByTwoCols(await getCourses());
+    const courses = this.orderByTwoCols(await getWorkshops());
     render(this.template(courses), this);
   }
 
@@ -11,13 +11,12 @@ export default class TilesCourses extends HTMLElement {
     return html`
       <div class="tile is-ancestor">
         ${courses.map(course => {
-          const { id, title, shortDescription, author, date, technology } = course;
+          const { id, title, author, date, technology } = course;
           return html`
             <app-tile-course
               id=${id}
               title=${title}
-              description=${shortDescription}
-              author-name=${author.name}
+              author-name=${author.firstname + ' ' + author.lastname}
               author-avatar=${author.avatar}
               date=${date}
               technology=${technology}

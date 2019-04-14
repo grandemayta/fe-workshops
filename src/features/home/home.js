@@ -9,7 +9,7 @@ export default class Home {
   template() {
     return html`
       <app-header></app-header>
-      <section>
+      <section class="main-wrapper">
         <div class="container">
           <app-tiles-courses></app-tiles-courses>
         </div>

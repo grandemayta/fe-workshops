@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import { getCourseById } from 'utils/http-wrapper';
+import { getWorkshopById } from 'utils/http-wrapper';
 
 export default class Detail {
   constructor(el, params) {
@@ -9,17 +9,19 @@ export default class Detail {
 
   template(data) {
     const { title, description, technology, author, date, time } = data;
+    const name = `${author.firstname} ${author.lastname}`;
+
     return html`
       <app-header></app-header>
       <app-sub-header title="Workshop detail"></app-sub-header>
-      <section>
+      <section class="main-wrapper">
         <div class="container">
           <div class="columns">
             <div class="column is-8">
               <h3 class="title is-3">${title}</h3>
               <p>${description}</p>
               <app-owner-course
-                name=${author.name}
+                name=${name}
                 avatar=${author.avatar}
                 role=${author.role}
                 technology=${technology}
@@ -39,7 +41,7 @@ export default class Detail {
   }
 
   async load() {
-    const data = await getCourseById(this.params.id);
+    const data = await getWorkshopById(this.params.id);
     render(this.template(data), this.el);
   }
 }

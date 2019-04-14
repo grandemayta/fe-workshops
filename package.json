@@ -25,6 +25,7 @@
     "custom-event-polyfill": "^1.0.6",
     "element-closest": "^3.0.1",
     "intersection-observer": "^0.5.1",
+    "js-cookie": "^2.2.0",
     "lit-html": "^1.0.0",
     "page": "^1.11.4"
   },

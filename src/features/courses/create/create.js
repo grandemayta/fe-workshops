@@ -10,14 +10,15 @@ export default class Create {
     return html`
       <app-header></app-header>
       <app-sub-header title="Create a workshop"></app-sub-header>
-      <div class="container">
-        <app-create-course type="create"></app-create-course>
-      </div>
+      <section class="main-wrapper">
+        <div class="container">
+          <app-create-course type="create"></app-create-course>
+        </div>
+      </section>
     `;
   }
 
   load() {
-    console.log(this.params);
     render(this.template(), this.el);
   }
 }

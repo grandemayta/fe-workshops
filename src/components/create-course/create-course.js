@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import { getCourseById } from 'utils/http-wrapper';
+import { getWorkshopById } from 'utils/http-wrapper';
 
 export default class CreateCourse extends HTMLElement {
   get type() {
@@ -12,7 +12,7 @@ export default class CreateCourse extends HTMLElement {
 
   async connectedCallback() {
     let data = {};
-    if (this.id) data = await getCourseById(this.id);
+    if (this.id) data = await getWorkshopById(this.id);
     render(this.template(data), this);
   }
 
