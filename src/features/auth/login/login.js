@@ -14,25 +14,11 @@ export default class Login {
     this.params[name] = value;
   }
 
-  showAlert(status, message) {
-    const containerAlertEl = this.el.querySelector('#signin-alert');
-    const alertEl = containerAlertEl.querySelector('app-alert');
-
-    alertEl.setAttribute('status', status);
-    alertEl.setAttribute('message', message);
-    containerAlertEl.classList.remove('is-hidden');
-  }
-
   async onLogin(e) {
     e.preventDefault();
     const response = await signin(this.params);
-
-    if (response.ko) {
-      this.showAlert('danger', response.message);
-    } else {
-      setUserSession(response);
-      page('/');
-    }
+    setUserSession(response);
+    page('/');
   }
 
   template() {
@@ -41,11 +27,7 @@ export default class Login {
       <app-sub-header title="Signin"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
-          <div id="signin-alert" class="columns is-centered is-hidden">
-            <div class="column">
-              <app-alert status message></app-alert>
-            </div>
-          </div>
+          <app-alert status message></app-alert>
           <div class="columns is-centered is-spacing-10">
             <div class="column is-4">
               <div class="field">

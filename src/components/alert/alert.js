@@ -21,11 +21,15 @@ export default class Alert extends HTMLElement {
 
   template() {
     return html`
-      <article class="message is-${this.status}">
-        <div class="message-body">
-          ${this.message}
+      <div class="columns is-centered">
+        <div class="column">
+          <article class="message is-${this.status}">
+            <div class="message-body">
+              ${this.message}
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
     `;
   }
 }

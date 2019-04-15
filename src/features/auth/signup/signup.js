@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import { signup } from 'utils/http-wrapper';
+import { setMessage } from 'utils/alert';
 
 export default class Signup {
   constructor(el) {
@@ -20,34 +21,13 @@ export default class Signup {
     this.params[name] = value;
   }
 
-  disableForm() {
-    const signupForm = this.el.querySelector('#signup-disabled');
-    signupForm.setAttribute('disabled', true);
-  }
-
-  showAlert(status, message) {
-    const containerAlertEl = this.el.querySelector('#signup-alert');
-    const alertEl = containerAlertEl.querySelector('app-alert');
-
-    alertEl.setAttribute('status', status);
-    alertEl.setAttribute('message', message);
-    containerAlertEl.classList.remove('is-hidden');
-
-    if (status === 'success') {
-      this.canSubmit = false;
-      this.disableForm();
-    }
-  }
-
   async onSubmit(e) {
     e.preventDefault();
     if (this.canSubmit) {
       const { confirmEmail, confirmPassword, ...params } = this.params;
       const response = await signup(params);
-      let status = 'success';
-
-      if (response.ko) status = 'danger';
-      this.showAlert(status, response.message);
+      setMessage(response.message);
+      this.canSubmit = false;
     }
   }
 
@@ -57,11 +37,7 @@ export default class Signup {
       <app-sub-header title="Signup"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
-          <div id="signup-alert" class="columns is-centered is-hidden">
-            <div class="column">
-              <app-alert status message></app-alert>
-            </div>
-          </div>
+          <app-alert status message></app-alert>
           <fieldset id="signup-disabled">
             <div class="columns is-centered is-spacing-10">
               <div class="column is-4">

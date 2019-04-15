@@ -59,6 +59,7 @@ const config = {
       src: `${src}`,
       assets: `${src}/assets`,
       core: `${src}/core`,
+      services: `${src}/services`,
       polyfills: `${src}/polyfills`,
       utils: `${src}/utils`,
       components: `${src}/components`,

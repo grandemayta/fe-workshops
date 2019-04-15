@@ -1,6 +1,7 @@
 import { html, render } from 'lit-html';
 import { updateProfile } from 'utils/http-wrapper';
 import { setUserSession } from 'utils/session-wrapper';
+import { setMessage } from 'utils/alert';
 
 export default class Profile {
   constructor(el, params) {
@@ -18,24 +19,12 @@ export default class Profile {
     this.requestData[name] = value;
   }
 
-  showAlert(status, message) {
-    const containerAlertEl = this.el.querySelector('#profile-alert');
-    const alertEl = containerAlertEl.querySelector('app-alert');
-
-    alertEl.setAttribute('status', status);
-    alertEl.setAttribute('message', message);
-    containerAlertEl.classList.remove('is-hidden');
-  }
-
   async onUpdateProfile(e) {
     e.preventDefault();
     const { id } = this.params.userSession;
     const response = await updateProfile(id, this.requestData);
-    let status = 'success';
-
-    if (response.ko) status = 'danger';
-    this.showAlert(status, response.message);
-    if (status === 'success') setUserSession(response.data);
+    setMessage(response.message);
+    setUserSession(response.data);
   }
 
   template() {
@@ -47,11 +36,7 @@ export default class Profile {
       <app-sub-header title="Profile"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
-          <div id="profile-alert" class="columns is-centered is-hidden">
-            <div class="column">
-              <app-alert status message></app-alert>
-            </div>
-          </div>
+          <app-alert status message></app-alert>
           <div class="columns is-centered is-spacing-20">
             <div class="column is-4">
               <figure class="image is-128x128 is-margin-centered">

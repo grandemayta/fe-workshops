@@ -1,10 +1,16 @@
+import { setMessage } from 'utils/alert';
 const BASE_URL = 'http://localhost:1337';
 
-const getResponse = async (endpoint, params) => {
+const getResponse = (endpoint, params) => {
   if (params.body) params.body = JSON.stringify(params.body);
-  const response = await fetch(`${BASE_URL}/${endpoint}`, params);
-  if (!response.ok) return { ko: true, message: 'Opss, something was wrong!' };
-  return response.json();
+  return new Promise((resolve, reject) => {
+    return fetch(`${BASE_URL}/${endpoint}`, params)
+      .then(response => {
+        if (response.ok) return response.json();
+        reject(new Error(setMessage(response.statusText, 'danger')));
+      })
+      .then(data => resolve(data));
+  });
 };
 
 export const getWorkshops = () => {
