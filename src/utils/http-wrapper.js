@@ -28,3 +28,8 @@ export const signin = payload => {
   const params = { method: 'POST', body: payload };
   return getResponse(`signin`, params);
 };
+
+export const updateProfile = (id, payload) => {
+  const params = { method: 'PUT', body: payload };
+  return getResponse(`user/${id}`, params);
+};

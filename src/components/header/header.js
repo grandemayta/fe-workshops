@@ -35,7 +35,7 @@ export default class Header extends HTMLElement {
             <img class="header-img-rounded" src="https://via.placeholder.com/150" />
           </a>
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item">
+            <a class="navbar-item" href="/profile">
               Profile
             </a>
             <a class="navbar-item">

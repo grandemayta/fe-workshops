@@ -7,6 +7,7 @@ const routes = () => {
   page('/courses/detail/:id', context => loadFeature('courses/detail/detail', context));
   page('/signup', context => loadFeature('auth/signup/signup', context));
   page('/login', context => loadFeature('auth/login/login', context));
+  page('/profile', context => loadFeature('profile/profile', context));
   page();
 };
 

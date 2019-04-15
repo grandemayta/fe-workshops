@@ -46,8 +46,8 @@ export default class Login {
               <app-alert status message></app-alert>
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column is-5">
+          <div class="columns is-centered is-spacing-10">
+            <div class="column is-4">
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
@@ -64,8 +64,8 @@ export default class Login {
               </div>
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column is-5">
+          <div class="columns is-centered is-spacing-10">
+            <div class="column is-4">
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
@@ -82,8 +82,8 @@ export default class Login {
               </div>
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column is-5">
+          <div class="columns is-centered is-spacing-20">
+            <div class="column is-4">
               <div class="field is-grouped is-grouped-right">
                 <a @click=${e => this.onLogin(e)} class="button is-medium is-primary">
                   Login
