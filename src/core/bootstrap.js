@@ -2,4 +2,4 @@ import routes from './routes';
 import 'components';
 import '../index.scss';
 
-routes();
+document.addEventListener('DOMContentLoaded', () => routes());
