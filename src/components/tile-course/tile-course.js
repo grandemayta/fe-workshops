@@ -30,6 +30,10 @@ export default class TileCourse extends HTMLElement {
     return this.getAttribute('technology');
   }
 
+  get secondAction() {
+    return this.getAttribute('secondAction');
+  }
+
   constructor() {
     super();
     this.setAttribute('class', 'tile is-6 is-parent');
@@ -39,9 +43,17 @@ export default class TileCourse extends HTMLElement {
     render(this.template(), this);
   }
 
-  template() {
-    const courseUrl = `/courses/detail/${this.id}`;
+  updateButtonTemplate() {
+    return html`
+      <p class="control">
+        <a class="button is-light" href="/courses/update/${this.id}">
+          Update
+        </a>
+      </p>
+    `;
+  }
 
+  template() {
     return html`
       <div class="tile is-child box">
         <div class="card">
@@ -66,10 +78,11 @@ export default class TileCourse extends HTMLElement {
               <a href="#">#${this.technology}</a>
               <div class="field is-grouped is-grouped-right">
                 <p class="control">
-                  <a class="button is-primary" href=${courseUrl}>
+                  <a class="button is-primary" href="/courses/detail/${this.id}">
                     Show
                   </a>
                 </p>
+                ${this.secondAction === 'edit' ? this.updateButtonTemplate() : ''}
               </div>
             </div>
           </div>

@@ -1,7 +1,20 @@
 import { html, render } from 'lit-html';
-import { getWorkshopById } from 'utils/http-wrapper';
+import { setMessage } from 'utils/alert';
+import { getWorkshopById, addWorkshop, updateWorkshopById } from 'utils/http-wrapper';
 
 export default class CreateCourse extends HTMLElement {
+  constructor() {
+    super();
+    this.canSubmit = true;
+    this.params = {
+      title: '',
+      description: '',
+      date: '',
+      time: '',
+      technology: ''
+    };
+  }
+
   get type() {
     return this.getAttribute('type');
   }
@@ -10,70 +23,148 @@ export default class CreateCourse extends HTMLElement {
     return this.getAttribute('id');
   }
 
-  async connectedCallback() {
-    let data = {};
-    if (this.id) data = await getWorkshopById(this.id);
-    render(this.template(data), this);
+  get speaker() {
+    return this.getAttribute('speaker');
   }
 
-  template(data) {
-    const { title, description } = data;
+  onKeyup(e) {
+    const { name, value } = e.target;
+    this.params[name] = value;
+  }
+
+  async connectedCallback() {
+    if (this.id) {
+      const { author, id, ...params } = await getWorkshopById(this.id);
+      this.params = params;
+    }
+    render(this.template(), this);
+  }
+
+  async onWorkshopCreate(e) {
+    e.preventDefault();
+    if (this.canSubmit) {
+      this.params.speakerId = this.speaker;
+      const response = await addWorkshop(this.params);
+      this.canSubmit = false;
+      setMessage(response.message);
+    }
+  }
+
+  async onWorkshopUpdate(e) {
+    e.preventDefault();
+    const response = await updateWorkshopById(this.id, this.params);
+    setMessage(response.message);
+  }
+
+  createButtonsTemplate() {
     return html`
-      <div class="columns">
+      <p class="control">
+        <a @click=${e => this.onWorkshopCreate(e)} class="button is-medium is-primary">
+          Create
+        </a>
+      </p>
+      <p class="control">
+        <a class="button is-medium is-light" href="/">
+          Cancel
+        </a>
+      </p>
+    `;
+  }
+
+  updateButtonsTemplate() {
+    return html`
+      <p class="control">
+        <a @click=${e => this.onWorkshopUpdate(e)} class="button is-medium is-primary">
+          Update
+        </a>
+      </p>
+      <p class="control">
+        <a class="button is-medium is-light" href="/">
+          Cancel
+        </a>
+      </p>
+    `;
+  }
+
+  template() {
+    const { title, description, date, time, technology } = this.params;
+    return html`
+      <div class="columns is-spacing-10">
         <div class="column is-half">
           <div class="field">
             <label class="label is-medium">Title</label>
-            <input class="input is-medium" value=${title || ''} />
+            <input
+              @keyup=${e => this.onKeyup(e)}
+              name="title"
+              class="input is-medium"
+              value=${title || ''}
+            />
           </div>
         </div>
       </div>
-      <div class="columns">
+      <div class="columns is-spacing-10">
         <div class="column">
           <div class="field">
             <label class="label is-medium">Description</label>
             <div class="control">
-              <textarea class="textarea is-medium">${description || ''}</textarea>
+              <textarea
+                @keyup=${e => this.onKeyup(e)}
+                name="description"
+                style="min-height: 240px;"
+                class="textarea is-medium"
+              >
+${description || ''}</textarea
+              >
             </div>
           </div>
         </div>
       </div>
-      <div class="columns">
+      <div class="columns is-spacing-10">
         <div class="column is-one-quarter">
           <div class="field">
             <label class="label is-medium">Date</label>
-            <input class="input is-medium" placeholder="DD-MM-YYY" />
+            <input
+              @keyup=${e => this.onKeyup(e)}
+              name="date"
+              class="input is-medium"
+              type="text"
+              value=${date || ''}
+              placeholder="DD-MM-YYY"
+            />
           </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter">
           <div class="field">
-            <label class="label is-medium">Photo</label>
-            <div class="file is-medium is-primary">
-              <label class="file-label">
-                <input class="file-input" type="file" name="resume" />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-                    Upload
-                  </span>
-                </span>
-              </label>
-            </div>
+            <label class="label is-medium">Time</label>
+            <input
+              @keyup=${e => this.onKeyup(e)}
+              name="time"
+              class="input is-medium"
+              type="text"
+              value=${time || ''}
+              placeholder="HH:MM"
+            />
           </div>
         </div>
       </div>
-      <div class="field is-grouped is-grouped-right">
-        <p class="control">
-          <a class="button is-medium is-primary">
-            Send
-          </a>
-        </p>
-        <p class="control">
-          <a class="button is-medium is-light" href="/">
-            Cancel
-          </a>
-        </p>
+      <div class="columns is-spacing-10">
+        <div class="column is-one-quarter">
+          <div class="field">
+            <label class="label is-medium">Technology</label>
+            <input
+              @keyup=${e => this.onKeyup(e)}
+              name="technology"
+              class="input is-medium"
+              type="text"
+              value=${technology || ''}
+              placeholder="Javascript"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="field is-grouped is-grouped-right is-spacing-20">
+        ${this.type === 'create' ? this.createButtonsTemplate() : ''}
+        ${this.type === 'update' ? this.updateButtonsTemplate() : ''}
       </div>
     `;
   }

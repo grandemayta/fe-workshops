@@ -6,7 +6,8 @@ import './header.scss';
 export default class Header extends HTMLElement {
   constructor() {
     super();
-    this.userIsLogged = false;
+    this.userSession = getUserSession();
+    this.userIsLogged = Boolean(this.userSession);
   }
 
   onLogout() {
@@ -14,16 +15,8 @@ export default class Header extends HTMLElement {
     page('/login');
   }
 
-  checkIfUserIsLogged() {
-    const userSession = getUserSession();
-    if (userSession) {
-      this.userIsLogged = true;
-    }
-  }
-
   connectedCallback() {
-    // @TODO handle menu stikcuy with 'is-fixed-top'
-    this.checkIfUserIsLogged();
+    // @TODO handle menu sticky with 'is-fixed-top'
     render(this.template(), this);
   }
 
@@ -38,7 +31,7 @@ export default class Header extends HTMLElement {
             <a class="navbar-item" href="/profile">
               Profile
             </a>
-            <a class="navbar-item">
+            <a class="navbar-item" href="speaker/${this.userSession.id}/workshops">
               Your workshops
             </a>
             <a class="navbar-item" href="/courses/create">

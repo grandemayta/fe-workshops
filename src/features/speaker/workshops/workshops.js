@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 
-export default class Update {
+export default class Workshops {
   constructor(el, params) {
     this.el = el;
     this.params = params;
@@ -9,11 +9,13 @@ export default class Update {
   template() {
     return html`
       <app-header></app-header>
-      <app-sub-header title="Modify your workshop"></app-sub-header>
+      <app-sub-header title="My workshops"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
-          <app-alert status message></app-alert>
-          <app-create-course type="update" id=${this.params.id}></app-create-course>
+          <app-tiles-courses
+            type="speaker"
+            speaker=${this.params.speakerId}
+          ></app-tiles-courses>
         </div>
       </section>
     `;

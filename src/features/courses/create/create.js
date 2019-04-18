@@ -12,7 +12,11 @@ export default class Create {
       <app-sub-header title="Create a workshop"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
-          <app-create-course type="create"></app-create-course>
+          <app-alert status message></app-alert>
+          <app-create-course
+            type="create"
+            speaker=${this.params.userSession.id}
+          ></app-create-course>
         </div>
       </section>
     `;

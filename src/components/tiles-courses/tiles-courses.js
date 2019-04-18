@@ -1,9 +1,31 @@
 import { html, render } from 'lit-html';
-import { getWorkshops } from 'utils/http-wrapper';
+import { getWorkshops, getWorkshopsBySpeaker } from 'utils/http-wrapper';
 
 export default class TilesCourses extends HTMLElement {
+  constructor() {
+    super();
+    this.secondAction = '';
+  }
+
+  get type() {
+    return this.getAttribute('type');
+  }
+
+  get speaker() {
+    return this.getAttribute('speaker');
+  }
+
   async connectedCallback() {
-    const courses = this.orderByTwoCols(await getWorkshops());
+    let courses = [];
+    switch (this.type) {
+      case 'speaker':
+        this.secondAction = 'edit';
+        courses = this.orderByTwoCols(await getWorkshopsBySpeaker(this.speaker));
+        break;
+      case 'all':
+      default:
+        courses = this.orderByTwoCols(await getWorkshops());
+    }
     render(this.template(courses), this);
   }
 
@@ -20,6 +42,7 @@ export default class TilesCourses extends HTMLElement {
               author-avatar=${author.avatar}
               date=${date}
               technology=${technology}
+              secondAction=${this.secondAction}
             ></app-tile-course>
           `;
         })}
@@ -32,10 +55,11 @@ export default class TilesCourses extends HTMLElement {
     let tileMain = [];
     let tileChildren = [];
 
-    courses.forEach(course => {
+    courses.forEach((course, index) => {
+      let lastValue = courses.length === index + 1;
       counter++;
       tileChildren.push(course);
-      if (counter === 2) {
+      if (counter === 2 || lastValue) {
         tileMain.push(tileChildren);
         tileChildren = [];
         counter = 0;

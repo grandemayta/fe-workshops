@@ -11,7 +11,7 @@ export default class Home {
       <app-header></app-header>
       <section class="main-wrapper">
         <div class="container">
-          <app-tiles-courses></app-tiles-courses>
+          <app-tiles-courses type="all"></app-tiles-courses>
         </div>
       </section>
     `;

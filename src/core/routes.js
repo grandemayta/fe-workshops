@@ -8,6 +8,9 @@ const routes = () => {
   page('/signup', context => loadFeature('auth/signup/signup', context));
   page('/login', context => loadFeature('auth/login/login', context));
   page('/profile', context => loadFeature('profile/profile', context));
+  page('/speaker/:speakerId/workshops', context =>
+    loadFeature('speaker/workshops/workshops', context)
+  );
   page();
 };
 
