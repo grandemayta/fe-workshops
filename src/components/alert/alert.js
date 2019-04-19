@@ -1,4 +1,5 @@
 import { html, render } from 'lit-html';
+import { scrollTo } from 'utils/scroll-to';
 
 export default class Alert extends HTMLElement {
   static get observedAttributes() {
@@ -16,6 +17,7 @@ export default class Alert extends HTMLElement {
   attributeChangedCallback(oldValue, newValue) {
     if (oldValue !== null && newValue !== null) {
       render(this.template(), this);
+      scrollTo();
     }
   }
 

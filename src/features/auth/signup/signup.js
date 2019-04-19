@@ -1,6 +1,7 @@
 import { html, render } from 'lit-html';
 import { signup } from 'utils/http-wrapper';
 import { setMessage } from 'utils/alert';
+import { disableFieldset } from 'utils/disable-fieldset';
 
 export default class Signup {
   constructor(el) {
@@ -27,6 +28,7 @@ export default class Signup {
       const { confirmEmail, confirmPassword, ...params } = this.params;
       const response = await signup(params);
       setMessage(response.message);
+      disableFieldset(this.el, '#signup-disabled');
       this.canSubmit = false;
     }
   }

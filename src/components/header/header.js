@@ -32,7 +32,7 @@ export default class Header extends HTMLElement {
               Profile
             </a>
             <a class="navbar-item" href="speaker/${this.userSession.id}/workshops">
-              Your workshops
+              My workshops
             </a>
             <a class="navbar-item" href="/courses/create">
               Create a workshop

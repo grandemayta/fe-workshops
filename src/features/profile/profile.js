@@ -6,29 +6,24 @@ import { setMessage } from 'utils/alert';
 export default class Profile {
   constructor(el, params) {
     this.el = el;
-    this.params = params;
-    this.requestData = {
-      avatar: params.userSession.avatar,
-      nickname: '',
-      role: ''
-    };
+    this.params = params.userSession;
   }
 
   onKeyup(e) {
     const { name, value } = e.target;
-    this.requestData[name] = value;
+    this.params[name] = value;
   }
 
   async onUpdateProfile(e) {
     e.preventDefault();
-    const { id } = this.params.userSession;
-    const response = await updateProfile(id, this.requestData);
+    const { id } = this.params;
+    const response = await updateProfile(id, this.params);
     setMessage(response.message);
     setUserSession(response.data);
   }
 
   template() {
-    const { firstname, lastname, email, avatar, role } = this.params.userSession;
+    const { firstname, lastname, email, avatar, role } = this.params;
     const name = `${firstname} ${lastname}`;
 
     return html`

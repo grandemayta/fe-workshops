@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import { setMessage } from 'utils/alert';
+import { disableFieldset } from 'utils/disable-fieldset';
 import { getWorkshopById, addWorkshop, updateWorkshopById } from 'utils/http-wrapper';
 
 export default class CreateCourse extends HTMLElement {
@@ -47,6 +48,7 @@ export default class CreateCourse extends HTMLElement {
       const response = await addWorkshop(this.params);
       this.canSubmit = false;
       setMessage(response.message);
+      disableFieldset(this, '#create-disabled');
     }
   }
 
@@ -89,83 +91,85 @@ export default class CreateCourse extends HTMLElement {
   template() {
     const { title, description, date, time, technology } = this.params;
     return html`
-      <div class="columns is-spacing-10">
-        <div class="column is-half">
-          <div class="field">
-            <label class="label is-medium">Title</label>
-            <input
-              @keyup=${e => this.onKeyup(e)}
-              name="title"
-              class="input is-medium"
-              value=${title || ''}
-            />
-          </div>
-        </div>
-      </div>
-      <div class="columns is-spacing-10">
-        <div class="column">
-          <div class="field">
-            <label class="label is-medium">Description</label>
-            <div class="control">
-              <textarea
+      <fieldset id="create-disabled">
+        <div class="columns is-spacing-10">
+          <div class="column is-half">
+            <div class="field">
+              <label class="label is-medium">Title</label>
+              <input
                 @keyup=${e => this.onKeyup(e)}
-                name="description"
-                style="min-height: 240px;"
-                class="textarea is-medium"
-              >
-${description || ''}</textarea
-              >
+                name="title"
+                class="input is-medium"
+                value=${title || ''}
+              />
             </div>
           </div>
         </div>
-      </div>
-      <div class="columns is-spacing-10">
-        <div class="column is-one-quarter">
-          <div class="field">
-            <label class="label is-medium">Date</label>
-            <input
-              @keyup=${e => this.onKeyup(e)}
-              name="date"
-              class="input is-medium"
-              type="text"
-              value=${date || ''}
-              placeholder="DD-MM-YYY"
-            />
+        <div class="columns is-spacing-10">
+          <div class="column">
+            <div class="field">
+              <label class="label is-medium">Description</label>
+              <div class="control">
+                <textarea
+                  @keyup=${e => this.onKeyup(e)}
+                  name="description"
+                  style="min-height: 240px;"
+                  class="textarea is-medium"
+                >
+  ${description || ''}</textarea
+                >
+              </div>
+            </div>
           </div>
         </div>
-        <div class="column is-one-quarter">
-          <div class="field">
-            <label class="label is-medium">Time</label>
-            <input
-              @keyup=${e => this.onKeyup(e)}
-              name="time"
-              class="input is-medium"
-              type="text"
-              value=${time || ''}
-              placeholder="HH:MM"
-            />
+        <div class="columns is-spacing-10">
+          <div class="column is-one-quarter">
+            <div class="field">
+              <label class="label is-medium">Date</label>
+              <input
+                @keyup=${e => this.onKeyup(e)}
+                name="date"
+                class="input is-medium"
+                type="text"
+                value=${date || ''}
+                placeholder="DD-MM-YYY"
+              />
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="field">
+              <label class="label is-medium">Time</label>
+              <input
+                @keyup=${e => this.onKeyup(e)}
+                name="time"
+                class="input is-medium"
+                type="text"
+                value=${time || ''}
+                placeholder="HH:MM"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="columns is-spacing-10">
-        <div class="column is-one-quarter">
-          <div class="field">
-            <label class="label is-medium">Technology</label>
-            <input
-              @keyup=${e => this.onKeyup(e)}
-              name="technology"
-              class="input is-medium"
-              type="text"
-              value=${technology || ''}
-              placeholder="Javascript"
-            />
+        <div class="columns is-spacing-10">
+          <div class="column is-one-quarter">
+            <div class="field">
+              <label class="label is-medium">Technology</label>
+              <input
+                @keyup=${e => this.onKeyup(e)}
+                name="technology"
+                class="input is-medium"
+                type="text"
+                value=${technology || ''}
+                placeholder="Javascript"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="field is-grouped is-grouped-right is-spacing-20">
-        ${this.type === 'create' ? this.createButtonsTemplate() : ''}
-        ${this.type === 'update' ? this.updateButtonsTemplate() : ''}
-      </div>
+        <div class="field is-grouped is-grouped-right is-spacing-20">
+          ${this.type === 'create' ? this.createButtonsTemplate() : ''}
+          ${this.type === 'update' ? this.updateButtonsTemplate() : ''}
+        </div>
+      </fieldset>
     `;
   }
 }
