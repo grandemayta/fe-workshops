@@ -10,12 +10,14 @@ export default class Detail {
   template(data) {
     const { title, description, technology, author, date, time } = data;
     const name = `${author.firstname} ${author.lastname}`;
+    const { id: workshopId, userSession } = this.params;
 
     return html`
       <app-header></app-header>
       <app-sub-header title="Workshop detail"></app-sub-header>
       <section class="main-wrapper">
         <div class="container">
+          <app-alert status message></app-alert>
           <div class="columns">
             <div class="column is-8">
               <h3 class="title is-3">${title}</h3>
@@ -32,7 +34,10 @@ export default class Detail {
             </div>
             <div class="column is-4">
               <h4 class="title is-4">Attendees</h4>
-              <app-attendees id=${this.params.id}></app-attendees>
+              <app-attendees
+                workshop-id=${workshopId}
+                attendee-id=${userSession && userSession.id}
+              ></app-attendees>
             </div>
           </div>
         </div>

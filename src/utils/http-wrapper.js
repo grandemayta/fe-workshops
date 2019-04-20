@@ -29,6 +29,11 @@ export const getAttendeesByWorkshop = workshopId => {
   return getResponse(`workshops/${workshopId}/attendees`);
 };
 
+export const addAttendeeByWorkshop = (workshopId, attendeeId) => {
+  const params = { method: 'POST' };
+  return getResponse(`workshops/${workshopId}/attendees/${attendeeId}`, params);
+};
+
 export const addWorkshop = payload => {
   const params = { method: 'POST', body: payload };
   return getResponse(`workshops`, params);
