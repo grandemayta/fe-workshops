@@ -22,6 +22,10 @@ export default class TileCourse extends HTMLElement {
     return this.getAttribute('author-avatar');
   }
 
+  get authorNickname() {
+    return this.getAttribute('author-nickname');
+  }
+
   get date() {
     return this.getAttribute('date');
   }
@@ -74,11 +78,19 @@ export default class TileCourse extends HTMLElement {
                   <span class="is-block is-size-5">
                     ${this.authorName}
                   </span>
+                  <span class="is-block is-spacing-0">
+                    <i class="fas fa-at has-text-grey-light"></i>
+                    ${this.authorNickname}
+                  </span>
                   <span class="is-block is-spacing-10">
                     <i class="fas fa-bell has-text-grey-light"></i>
                     <time datetime=${this.date}>${this.date} - ${this.time}</time>
                   </span>
-                  <span class="is-block is-spacing-10">
+                  <span
+                    class="is-block is-spacing-10 ${this.action === 'read'
+                      ? 'is-hidden'
+                      : ''}"
+                  >
                     <a href="#">#${this.technology}</a>
                   </span>
                 </p>
@@ -87,6 +99,11 @@ export default class TileCourse extends HTMLElement {
 
             <div class="content">
               <div class="field is-grouped is-grouped-right">
+                <p class="control ${this.action === 'edit' ? 'is-hidden' : ''}">
+                  <a class="button is-text has-text-link" href="#">
+                    #${this.technology}
+                  </a>
+                </p>
                 <p class="control">
                   <a class="button is-link" href="/courses/detail/${this.id}">
                     Show

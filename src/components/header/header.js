@@ -83,6 +83,8 @@ export default class Header extends HTMLElement {
         </div>
         ${this.userIsLogged ? this.loggedTemplate() : this.unloggedTemplate()}
       </nav>
+      <app-sub-header title></app-sub-header>
+      <app-progress-bar status></app-progress-bar>
     `;
   }
 }

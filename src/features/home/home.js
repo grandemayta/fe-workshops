@@ -8,12 +8,9 @@ export default class Home {
 
   template() {
     return html`
-      <app-header></app-header>
-      <section class="main-wrapper">
-        <div class="container">
-          <app-tiles-courses type="all"></app-tiles-courses>
-        </div>
-      </section>
+      <div class="container">
+        <app-tiles-courses type="all"></app-tiles-courses>
+      </div>
     `;
   }
 

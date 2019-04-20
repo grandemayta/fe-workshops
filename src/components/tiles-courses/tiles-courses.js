@@ -2,11 +2,6 @@ import { html, render } from 'lit-html';
 import { getWorkshops, getWorkshopsBySpeaker } from 'utils/http-wrapper';
 
 export default class TilesCourses extends HTMLElement {
-  constructor() {
-    super();
-    this.secondAction = '';
-  }
-
   get type() {
     return this.getAttribute('type');
   }
@@ -24,6 +19,7 @@ export default class TilesCourses extends HTMLElement {
         break;
       case 'all':
       default:
+        this.action = 'read';
         courses = this.orderByTwoCols(await getWorkshops());
     }
     render(this.template(courses), this);
@@ -40,6 +36,7 @@ export default class TilesCourses extends HTMLElement {
               title=${title}
               author-name=${author.firstname + ' ' + author.lastname}
               author-avatar=${author.avatar}
+              author-nickname=${author.nickname}
               date=${date}
               time=${time}
               technology=${technology}

@@ -4,9 +4,10 @@ import { setUserSession } from 'utils/session-wrapper';
 import { page } from 'utils/page-features';
 
 export default class Login {
-  constructor(el) {
+  constructor(el, config) {
     this.el = el;
-    this.params = { email: '', password: '' };
+    config.title('Login');
+    this.params = {};
   }
 
   onKeyup(e) {
@@ -23,58 +24,54 @@ export default class Login {
 
   template() {
     return html`
-      <app-header></app-header>
-      <app-sub-header title="Signin"></app-sub-header>
-      <section class="main-wrapper">
-        <div class="container">
-          <app-alert status message></app-alert>
-          <div class="columns is-centered is-spacing-10">
-            <div class="column is-4">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    @keyup=${e => this.onKeyup(e)}
-                    name="email"
-                    class="input is-medium"
-                    type="text"
-                    placeholder="Email"
-                  />
-                  <span class="icon is-medium is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="columns is-centered is-spacing-10">
-            <div class="column is-4">
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    @keyup=${e => this.onKeyup(e)}
-                    name="password"
-                    class="input is-medium"
-                    type="password"
-                    placeholder="Password"
-                  />
-                  <span class="icon is-medium is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="columns is-centered is-spacing-20">
-            <div class="column is-4">
-              <div class="field is-grouped is-grouped-right">
-                <a @click=${e => this.onLogin(e)} class="button is-medium is-link">
-                  Login
-                </a>
-              </div>
+      <div class="container">
+        <app-alert status message></app-alert>
+        <div class="columns is-centered is-spacing-10">
+          <div class="column is-4">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input
+                  @keyup=${e => this.onKeyup(e)}
+                  name="email"
+                  class="input is-medium"
+                  type="text"
+                  placeholder="Email"
+                />
+                <span class="icon is-medium is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </p>
             </div>
           </div>
         </div>
-      </section>
+        <div class="columns is-centered is-spacing-10">
+          <div class="column is-4">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input
+                  @keyup=${e => this.onKeyup(e)}
+                  name="password"
+                  class="input is-medium"
+                  type="password"
+                  placeholder="Password"
+                />
+                <span class="icon is-medium is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered is-spacing-20">
+          <div class="column is-4">
+            <div class="field is-grouped is-grouped-right">
+              <a @click=${e => this.onLogin(e)} class="button is-medium is-link">
+                Login
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
   }
 

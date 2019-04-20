@@ -4,21 +4,18 @@ export default class Create {
   constructor(el, params) {
     this.el = el;
     this.params = params;
+    this.params.title('Create your workshop');
   }
 
   template() {
     return html`
-      <app-header></app-header>
-      <app-sub-header title="Create a workshop"></app-sub-header>
-      <section class="main-wrapper">
-        <div class="container">
-          <app-alert status message></app-alert>
-          <app-create-course
-            type="create"
-            speaker=${this.params.userSession.id}
-          ></app-create-course>
-        </div>
-      </section>
+      <div class="container">
+        <app-alert status message></app-alert>
+        <app-create-course
+          type="create"
+          speaker=${this.params.userSession.id}
+        ></app-create-course>
+      </div>
     `;
   }
 
