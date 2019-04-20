@@ -26,12 +26,16 @@ export default class TileCourse extends HTMLElement {
     return this.getAttribute('date');
   }
 
+  get time() {
+    return this.getAttribute('time');
+  }
+
   get technology() {
     return this.getAttribute('technology');
   }
 
-  get secondAction() {
-    return this.getAttribute('secondAction');
+  get action() {
+    return this.getAttribute('action');
   }
 
   constructor() {
@@ -67,22 +71,28 @@ export default class TileCourse extends HTMLElement {
               <div class="media-content">
                 <p class="title is-4">${this.title}</p>
                 <p class="subtitle is-6">
-                  ${this.authorName} - <time datetime=${this.date}>${this.date}</time>
+                  <span class="is-block is-size-5">
+                    ${this.authorName}
+                  </span>
+                  <span class="is-block is-spacing-10">
+                    <i class="fas fa-bell has-text-grey-light"></i>
+                    <time datetime=${this.date}>${this.date} - ${this.time}</time>
+                  </span>
+                  <span class="is-block is-spacing-10">
+                    <a href="#">#${this.technology}</a>
+                  </span>
                 </p>
               </div>
             </div>
 
             <div class="content">
-              ${this.description}
-              <br />
-              <a href="#">#${this.technology}</a>
               <div class="field is-grouped is-grouped-right">
                 <p class="control">
-                  <a class="button is-primary" href="/courses/detail/${this.id}">
+                  <a class="button is-link" href="/courses/detail/${this.id}">
                     Show
                   </a>
                 </p>
-                ${this.secondAction === 'edit' ? this.updateButtonTemplate() : ''}
+                ${this.action === 'edit' ? this.updateButtonTemplate() : ''}
               </div>
             </div>
           </div>

@@ -67,7 +67,7 @@ export default class Login {
           <div class="columns is-centered is-spacing-20">
             <div class="column is-4">
               <div class="field is-grouped is-grouped-right">
-                <a @click=${e => this.onLogin(e)} class="button is-medium is-primary">
+                <a @click=${e => this.onLogin(e)} class="button is-medium is-link">
                   Login
                 </a>
               </div>

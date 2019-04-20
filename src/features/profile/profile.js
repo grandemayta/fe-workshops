@@ -101,7 +101,7 @@ export default class Profile {
               <div class="field is-grouped is-grouped-right">
                 <a
                   @click=${e => this.onUpdateProfile(e)}
-                  class="button is-medium is-primary"
+                  class="button is-medium is-link"
                 >
                   Update Profile
                 </a>

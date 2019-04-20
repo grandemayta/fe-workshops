@@ -34,6 +34,11 @@ export const addAttendeeByWorkshop = (workshopId, attendeeId) => {
   return getResponse(`workshops/${workshopId}/attendees/${attendeeId}`, params);
 };
 
+export const removeAttendeeByWorkshop = (workshopId, attendeeId) => {
+  const params = { method: 'PUT' };
+  return getResponse(`workshops/${workshopId}/attendees/${attendeeId}`, params);
+};
+
 export const addWorkshop = payload => {
   const params = { method: 'POST', body: payload };
   return getResponse(`workshops`, params);

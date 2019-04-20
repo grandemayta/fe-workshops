@@ -55,7 +55,7 @@ export default class Header extends HTMLElement {
       <div class="navbar-end is-hidden-mobile is-hidden-tablet-only">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary" href="/signup">
+            <a class="button is-link" href="/signup">
               <strong>Sign up</strong>
             </a>
             <a class="button is-light" href="/login">
@@ -69,10 +69,10 @@ export default class Header extends HTMLElement {
 
   template() {
     return html`
-      <nav class="navbar is-primary">
+      <nav class="navbar is-link">
         <div class="navbar-brand">
           <div class="navbar-item is-size-5 has-text-weight-bold" href="/">
-            <a class="button is-primary" href="/">
+            <a class="button is-link" href="/">
               <span class="icon">
                 <i class="fas fa-lg fa-laptop-code"></i>
               </span>

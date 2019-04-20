@@ -1,5 +1,12 @@
 .main-wrapper {
-    padding-top: 40px;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1087px) {
+    .main-wrapper {
+        padding: 1.5rem;
+    }
 }
 
 .is-margin-centered {

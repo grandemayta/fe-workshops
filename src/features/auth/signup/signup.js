@@ -146,7 +146,7 @@ export default class Signup {
             <div class="columns is-centered is-spacing-20">
               <div class="column is-8">
                 <div class="field is-grouped is-grouped-right">
-                  <a @click=${e => this.onSubmit(e)} class="button is-medium is-primary">
+                  <a @click=${e => this.onSubmit(e)} class="button is-medium is-link">
                     Signup
                   </a>
                 </div>

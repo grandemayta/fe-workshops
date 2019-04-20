@@ -1,7 +1,11 @@
 import { html, render } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
 import { setMessage } from 'utils/alert';
-import { getAttendeesByWorkshop, addAttendeeByWorkshop } from 'utils/http-wrapper';
+import {
+  getAttendeesByWorkshop,
+  addAttendeeByWorkshop,
+  removeAttendeeByWorkshop
+} from 'utils/http-wrapper';
 import './attendees.scss';
 
 export default class Attendees extends HTMLElement {
@@ -13,17 +17,16 @@ export default class Attendees extends HTMLElement {
     return this.getAttribute('attendee-id');
   }
 
-  async onAddAttendee(e) {
+  async onAddRemoveAttendee(e, action = 'add') {
     e.preventDefault();
-    const response = await addAttendeeByWorkshop(this.workshopId, this.attendeeId);
+    let response = null;
+    if (action === 'add') {
+      response = await addAttendeeByWorkshop(this.workshopId, this.attendeeId);
+    } else {
+      response = await removeAttendeeByWorkshop(this.workshopId, this.attendeeId);
+    }
     setMessage(response.message);
-    this.canAddParticipate = false;
     this.load();
-  }
-
-  async onRemoveAttendee(e) {
-    e.preventDefault();
-    console.log('Remove....');
   }
 
   connectedCallback() {
@@ -47,7 +50,7 @@ export default class Attendees extends HTMLElement {
     return html`
       <hr />
       <p class="buttons is-centered">
-        <a @click=${e => this.onAddAttendee(e)} class="button is-primary is-medium">
+        <a @click=${e => this.onAddRemoveAttendee(e)} class="button is-link is-medium">
           Subscribe
         </a>
       </p>
@@ -58,7 +61,7 @@ export default class Attendees extends HTMLElement {
     this.canAddParticipate = false;
     return html`
       <span
-        @click=${e => this.onRemoveAttendee(e)}
+        @click=${e => this.onAddRemoveAttendee(e, 'remove')}
         class="icon has-text-danger is-pulled-right"
       >
         <i class="fas fa-trash-alt fa-lg"></i>
@@ -67,6 +70,7 @@ export default class Attendees extends HTMLElement {
   }
 
   template(attendees, canSubscribe) {
+    const checkAttendeeId = this.attendeeId !== 'undefined';
     return html`
       <div class="box">
         ${repeat(attendees, attendee => {
@@ -89,7 +93,7 @@ export default class Attendees extends HTMLElement {
             </article>
           `;
         })}
-        ${canSubscribe ? this.addAttendeeeTemplate() : null}
+        ${checkAttendeeId && canSubscribe ? this.addAttendeeeTemplate() : null}
       </div>
     `;
   }

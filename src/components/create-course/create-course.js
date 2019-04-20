@@ -61,7 +61,7 @@ export default class CreateCourse extends HTMLElement {
   createButtonsTemplate() {
     return html`
       <p class="control">
-        <a @click=${e => this.onWorkshopCreate(e)} class="button is-medium is-primary">
+        <a @click=${e => this.onWorkshopCreate(e)} class="button is-medium is-link">
           Create
         </a>
       </p>
@@ -76,7 +76,7 @@ export default class CreateCourse extends HTMLElement {
   updateButtonsTemplate() {
     return html`
       <p class="control">
-        <a @click=${e => this.onWorkshopUpdate(e)} class="button is-medium is-primary">
+        <a @click=${e => this.onWorkshopUpdate(e)} class="button is-medium is-link">
           Update
         </a>
       </p>

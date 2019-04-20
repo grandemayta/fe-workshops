@@ -19,7 +19,7 @@ export default class TilesCourses extends HTMLElement {
     let courses = [];
     switch (this.type) {
       case 'speaker':
-        this.secondAction = 'edit';
+        this.action = 'edit';
         courses = this.orderByTwoCols(await getWorkshopsBySpeaker(this.speaker));
         break;
       case 'all':
@@ -33,7 +33,7 @@ export default class TilesCourses extends HTMLElement {
     return html`
       <div class="tile is-ancestor">
         ${courses.map(course => {
-          const { id, title, author, date, technology } = course;
+          const { id, title, author, date, time, technology } = course;
           return html`
             <app-tile-course
               id=${id}
@@ -41,8 +41,9 @@ export default class TilesCourses extends HTMLElement {
               author-name=${author.firstname + ' ' + author.lastname}
               author-avatar=${author.avatar}
               date=${date}
+              time=${time}
               technology=${technology}
-              secondAction=${this.secondAction}
+              action=${this.action}
             ></app-tile-course>
           `;
         })}
