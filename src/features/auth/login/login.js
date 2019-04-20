@@ -19,6 +19,7 @@ export default class Login {
     e.preventDefault();
     const response = await signin(this.params);
     setUserSession(response);
+    document.dispatchEvent(new CustomEvent('auth:login'));
     page('/');
   }
 

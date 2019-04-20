@@ -7,3 +7,4 @@ import './attendees/attendees';
 import './owner-course/owner-course';
 import './alert/alert';
 import './progress-bar/progress-bar';
+import './auth-buttons/auth-buttons';
