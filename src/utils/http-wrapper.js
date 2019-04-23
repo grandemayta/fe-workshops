@@ -24,6 +24,10 @@ export const getWorkshops = () => {
   return getResponse(`workshops`);
 };
 
+export const getWorkshopsByHashtag = technology => {
+  return getResponse(`workshops?technology=${technology}`);
+};
+
 export const getWorkshopById = workshopId => {
   return getResponse(`workshops/${workshopId}`);
 };

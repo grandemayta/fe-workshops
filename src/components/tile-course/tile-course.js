@@ -91,7 +91,7 @@ export default class TileCourse extends HTMLElement {
                       ? 'is-hidden'
                       : ''}"
                   >
-                    <a href="#">#${this.technology}</a>
+                    <a href="/hashtag/${this.technology}">#${this.technology}</a>
                   </span>
                 </p>
               </div>
@@ -100,7 +100,10 @@ export default class TileCourse extends HTMLElement {
             <div class="content">
               <div class="field is-grouped is-grouped-right">
                 <p class="control ${this.action === 'edit' ? 'is-hidden' : ''}">
-                  <a class="button is-text has-text-link" href="#">
+                  <a
+                    href="/hashtag/${this.technology}"
+                    class="button is-text has-text-link"
+                  >
                     #${this.technology}
                   </a>
                 </p>

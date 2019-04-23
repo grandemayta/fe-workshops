@@ -1,5 +1,9 @@
 import { html, render } from 'lit-html';
-import { getWorkshops, getWorkshopsBySpeaker } from 'utils/http-wrapper';
+import {
+  getWorkshops,
+  getWorkshopsBySpeaker,
+  getWorkshopsByHashtag
+} from 'utils/http-wrapper';
 
 export default class TilesCourses extends HTMLElement {
   get type() {
@@ -10,9 +14,17 @@ export default class TilesCourses extends HTMLElement {
     return this.getAttribute('speaker');
   }
 
+  get value() {
+    return this.getAttribute('value');
+  }
+
   async connectedCallback() {
     let courses = [];
     switch (this.type) {
+      case 'hashtag':
+        this.action = 'hashtag';
+        courses = this.orderByTwoCols(await getWorkshopsByHashtag(this.value));
+        break;
       case 'speaker':
         this.action = 'edit';
         courses = this.orderByTwoCols(await getWorkshopsBySpeaker(this.speaker));
