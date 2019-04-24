@@ -12,6 +12,9 @@ const routes = () => {
   page('/speaker/:speakerId/workshops', context =>
     loadFeature('speaker/workshops/workshops', context)
   );
+  page('/attendee/:userId/workshops', context =>
+    loadFeature('attendee/workshops/workshops', context)
+  );
   page();
 };
 

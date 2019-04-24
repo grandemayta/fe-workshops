@@ -47,9 +47,18 @@ export default class OwnerCourse extends HTMLElement {
           </div>
           <hr />
           <div class="content">
-            <p><strong>Technology: </strong><a href="#">#${this.technology}</a></p>
-            <p><strong>Date: </strong><time>${this.date}</time></p>
-            <p><strong>Time: </strong><time>${this.time}</time></p>
+            <p>
+              <strong>Technology: </strong>
+              <a href="/hashtag/${this.technology}">#${this.technology}</a>
+            </p>
+            <p>
+              <strong>Date: </strong>
+              <time>${this.date}</time>
+            </p>
+            <p>
+              <strong>Time: </strong>
+              <time>${this.time}</time>
+            </p>
           </div>
         </div>
       </div>

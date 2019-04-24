@@ -74,3 +74,7 @@ export const updateProfile = (id, payload) => {
   const params = { method: 'PUT', body: payload };
   return getResponse(`user/${id}`, params);
 };
+
+export const getWorkshopsByAttendee = attendeeId => {
+  return getResponse(`attendees/${attendeeId}/workshops`);
+};

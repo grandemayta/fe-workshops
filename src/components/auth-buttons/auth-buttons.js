@@ -47,7 +47,7 @@ export default class AuthButtons extends HTMLElement {
           <a class="navbar-item" href="/courses/create">
             Create a workshop
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" href="attendee/${this.userSession.id}/workshops">
             Your events
           </a>
           <hr class="navbar-divider" />
