@@ -1,11 +1,11 @@
 import { html, render } from 'lit-html';
 import { repeat } from 'lit-html/directives/repeat';
-import { setMessage } from 'utils/alert';
+import { setMessage } from 'helpers';
 import {
-  getAttendeesByWorkshop,
-  addAttendeeByWorkshop,
-  removeAttendeeByWorkshop
-} from 'utils/http-wrapper';
+  workshopAttendees,
+  addAttendeeToWorkshop,
+  removeAttendeeFromWorkshop
+} from 'services';
 import './attendees.scss';
 
 export default class Attendees extends HTMLElement {
@@ -21,9 +21,9 @@ export default class Attendees extends HTMLElement {
     e.preventDefault();
     let response = null;
     if (action === 'add') {
-      response = await addAttendeeByWorkshop(this.workshopId, this.attendeeId);
+      response = await addAttendeeToWorkshop(this.workshopId, this.attendeeId);
     } else {
-      response = await removeAttendeeByWorkshop(this.workshopId, this.attendeeId);
+      response = await removeAttendeeFromWorkshop(this.workshopId, this.attendeeId);
     }
     setMessage(response.message);
     this.load();
@@ -34,7 +34,7 @@ export default class Attendees extends HTMLElement {
   }
 
   async load() {
-    let attendees = await getAttendeesByWorkshop(this.workshopId);
+    let attendees = await workshopAttendees(this.workshopId);
     let canSubscribe = true;
     attendees = attendees.map(attendee => {
       if (this.attendeeId === attendee.id) {

@@ -1,6 +1,5 @@
 import { html, render } from 'lit-html';
-import { getUserSession, removeUserSession } from 'utils/session-wrapper';
-import { page } from 'utils/page-features';
+import { page, getUserSession, removeUserSession } from 'helpers';
 
 export default class AuthButtons extends HTMLElement {
   constructor() {

@@ -1,11 +1,10 @@
-import _page from 'page';
-import { getUserSession } from 'utils/session-wrapper';
+import { getUserSession } from 'helpers';
 
 const handleSubHeader = (eventName, detail) => {
   document.dispatchEvent(new CustomEvent(eventName, { detail }));
 };
 
-export const loadFeature = (path, context) => {
+export const route = (path, context) => {
   import(`features/${path}`).then(({ default: Feature }) => {
     const { params, path } = context;
 
@@ -19,5 +18,3 @@ export const loadFeature = (path, context) => {
     feature.load();
   });
 };
-
-export const page = _page;

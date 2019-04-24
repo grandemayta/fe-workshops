@@ -1,7 +1,6 @@
 import { html, render } from 'lit-html';
-import { signin } from 'utils/http-wrapper';
-import { setUserSession } from 'utils/session-wrapper';
-import { page } from 'utils/page-features';
+import { signin } from 'services';
+import { page, setUserSession } from 'helpers';
 
 export default class Login {
   constructor(el, config) {

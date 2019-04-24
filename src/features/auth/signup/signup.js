@@ -1,7 +1,6 @@
 import { html, render } from 'lit-html';
-import { signup } from 'utils/http-wrapper';
-import { setMessage } from 'utils/alert';
-import { disableFieldset } from 'utils/disable-fieldset';
+import { signup } from 'services';
+import { setMessage, disableFieldset } from 'helpers';
 
 export default class Signup {
   constructor(el, config) {

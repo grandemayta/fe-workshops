@@ -1,9 +1,5 @@
 import { html, render } from 'lit-html';
-import {
-  getWorkshops,
-  getWorkshopsBySpeaker,
-  getWorkshopsByHashtag
-} from 'utils/http-wrapper';
+import { workshops, workshopsBySpeaker, workshopsByHashtag } from 'services';
 
 export default class TilesCourses extends HTMLElement {
   get type() {
@@ -23,16 +19,16 @@ export default class TilesCourses extends HTMLElement {
     switch (this.type) {
       case 'hashtag':
         this.action = 'hashtag';
-        courses = this.orderByTwoCols(await getWorkshopsByHashtag(this.value));
+        courses = this.orderByTwoCols(await workshopsByHashtag(this.value));
         break;
       case 'speaker':
         this.action = 'edit';
-        courses = this.orderByTwoCols(await getWorkshopsBySpeaker(this.speaker));
+        courses = this.orderByTwoCols(await workshopsBySpeaker(this.speaker));
         break;
       case 'all':
       default:
         this.action = 'read';
-        courses = this.orderByTwoCols(await getWorkshops());
+        courses = this.orderByTwoCols(await workshops());
     }
     render(this.template(courses), this);
   }

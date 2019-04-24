@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import { getWorkshopById } from 'utils/http-wrapper';
+import { workshopById } from 'services';
 
 export default class Detail {
   constructor(el, params) {
@@ -43,7 +43,7 @@ export default class Detail {
   }
 
   async load() {
-    const data = await getWorkshopById(this.params.id);
+    const data = await workshopById(this.params.id);
     render(this.template(data), this.el);
   }
 }

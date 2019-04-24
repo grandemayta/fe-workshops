@@ -1,5 +1,5 @@
 import { html, render } from 'lit-html';
-import { scrollTo } from 'utils/scroll-to';
+import { scrollTo } from 'helpers';
 
 export default class Alert extends HTMLElement {
   static get observedAttributes() {

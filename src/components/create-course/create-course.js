@@ -1,7 +1,6 @@
 import { html, render } from 'lit-html';
-import { setMessage } from 'utils/alert';
-import { disableFieldset } from 'utils/disable-fieldset';
-import { getWorkshopById, addWorkshop, updateWorkshopById } from 'utils/http-wrapper';
+import { setMessage, disableFieldset } from 'helpers';
+import { workshopById, createWorkshop, updateWorkshop } from 'services';
 
 export default class CreateCourse extends HTMLElement {
   constructor() {
@@ -35,7 +34,7 @@ export default class CreateCourse extends HTMLElement {
 
   async connectedCallback() {
     if (this.id) {
-      const { author, id, ...params } = await getWorkshopById(this.id);
+      const { author, id, ...params } = await workshopById(this.id);
       this.params = params;
     }
     render(this.template(), this);
@@ -45,7 +44,7 @@ export default class CreateCourse extends HTMLElement {
     e.preventDefault();
     if (this.canSubmit) {
       this.params.speakerId = this.speaker;
-      const response = await addWorkshop(this.params);
+      const response = await createWorkshop(this.params);
       this.canSubmit = false;
       setMessage(response.message);
       disableFieldset(this, '#create-disabled');
@@ -54,7 +53,7 @@ export default class CreateCourse extends HTMLElement {
 
   async onWorkshopUpdate(e) {
     e.preventDefault();
-    const response = await updateWorkshopById(this.id, this.params);
+    const response = await updateWorkshop(this.id, this.params);
     setMessage(response.message);
   }
 

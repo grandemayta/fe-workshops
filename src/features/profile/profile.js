@@ -1,7 +1,6 @@
 import { html, render } from 'lit-html';
-import { updateProfile } from 'utils/http-wrapper';
-import { setUserSession } from 'utils/session-wrapper';
-import { setMessage } from 'utils/alert';
+import { updateProfile } from 'services';
+import { setUserSession, setMessage } from 'helpers';
 
 export default class Profile {
   constructor(el, params) {
