@@ -6,7 +6,6 @@ import {
   addAttendeeToWorkshop,
   removeAttendeeFromWorkshop
 } from 'services';
-import './attendees.scss';
 
 export default class Attendees extends HTMLElement {
   get workshopId() {

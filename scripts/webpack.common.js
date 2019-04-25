@@ -1,4 +1,5 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { src, dist, isLegacy, env, configByEnv } = require('./get-setup');
 const entry = `${src}/index.js`;
 const entryLegacy = ['core-js/fn/promise', entry];
@@ -28,17 +29,7 @@ const config = {
     rules: [
       {
         test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader'
-          }
-        ]
+        loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(jpg|png|gif|eot|woff|ttf|svg)$/,
