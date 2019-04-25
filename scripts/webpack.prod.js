@@ -8,12 +8,12 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     chunkFilename: isLegacy ? 'chunks/[id].legacy.min.js' : 'chunks/[id].min.js',
-    filename: isLegacy ? 'index.legacy.min.js' : 'index.min.js'
+    filename: isLegacy ? '[name].legacy.min.js' : '[name].min.js'
   },
   plugins: [
     new OptimizeCssAssetsPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'index.min.css'
+      filename: 'style.min.css'
     })
   ]
 });

@@ -1,8 +1,14 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { src, dist, isLegacy, env, configByEnv } = require('./get-setup');
-const entry = `${src}/index.js`;
-const entryLegacy = ['core-js/fn/promise', entry];
+const entry = {
+  vendor: ['lit-html', 'page', 'js-cookie'],
+  bundle: `${src}/index.js`
+};
+const entryLegacy = {
+  vendor: ['core-js/fn/promise', 'lit-html', 'page', 'js-cookie'],
+  bundle: `${src}/index.js`
+};
 
 const cleanWebpackPlugin = new CleanWebpackPlugin([dist], {
   root: process.cwd(),
@@ -19,7 +25,15 @@ const babel = {
 const config = {
   optimization: {
     splitChunks: {
-      maxAsyncRequests: 1
+      maxAsyncRequests: 1,
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        }
+      }
     }
   },
   output: {
