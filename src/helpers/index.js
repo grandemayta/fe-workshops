@@ -1,8 +1,7 @@
-import { setMessage } from './alert';
-import { disableFieldset } from './disable-fieldset';
-import { setProgressBar } from './progress-bar';
-import { scrollTo } from './scroll-to';
-
-export { setMessage, disableFieldset, setProgressBar, scrollTo };
-
+import page from 'page';
+export { setMessage } from './alert';
+export { disableFieldset } from './disable-fieldset';
+export { setProgressBar } from './progress-bar';
+export { scrollTo } from './scroll-to';
 export * from './session-wrapper';
+export { page };
