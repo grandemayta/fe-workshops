@@ -1,7 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const { dist } = require('./get-setup');
+const { src, dist } = require('./get-setup');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -19,6 +20,11 @@ module.exports = merge(common, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'index.css'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Workshops',
+      template: `${src}/index.demo.html`,
+      filename: 'index.html'
     })
   ]
 });

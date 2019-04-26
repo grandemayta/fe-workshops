@@ -1,19 +1,32 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const { isLegacy } = require('./get-setup');
+const { src, isLegacy } = require('./get-setup');
 
-module.exports = merge(common, {
+const prodConfig = merge(common, {
   mode: 'production',
   output: {
-    chunkFilename: isLegacy ? 'chunks/[id].legacy.min.js' : 'chunks/[id].min.js',
-    filename: isLegacy ? '[name].legacy.min.js' : '[name].min.js'
+    chunkFilename: isLegacy ? 'legacy/[name].legacy.min.js' : '[name].[chunkhash].min.js',
+    filename: isLegacy ? '[name].legacy.min.js' : '[name].[chunkhash].min.js'
   },
   plugins: [
-    new OptimizeCssAssetsPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.min.css'
-    })
+      filename: 'style.[chunkhash].min.css'
+    }),
+    new OptimizeCssAssetsPlugin()
   ]
 });
+
+if (!isLegacy) {
+  prodConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      title: 'Workshops',
+      template: `${src}/index.html`,
+      filename: 'index.html'
+    })
+  );
+}
+
+module.exports = prodConfig;

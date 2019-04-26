@@ -1,20 +1,21 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { src, dist, isLegacy, env, configByEnv } = require('./get-setup');
 const entry = {
-  vendor: ['lit-html', 'page', 'js-cookie'],
+  vendor: ['js-cookie', 'page', 'lit-html'],
   bundle: `${src}/index.js`
 };
 const entryLegacy = {
-  vendor: ['core-js/fn/promise', 'lit-html', 'page', 'js-cookie'],
-  bundle: `${src}/index.js`
+  vendor: entry.vendor,
+  bundle: ['core-js/fn/promise', entry.bundle]
 };
 
-const cleanWebpackPlugin = new CleanWebpackPlugin([dist], {
+const cleanWebpackPlugin = new CleanWebpackPlugin({
   root: process.cwd(),
   verbose: true,
-  dry: false
+  dry: false,
+  cleanOnceBeforeBuildPatterns: [dist],
+  cleanAfterEveryBuildPatterns: [`${dist}/*.css`]
 });
 
 const babel = {
@@ -72,21 +73,16 @@ const config = {
       features: `${src}/features`
     }
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Workshops',
-      template: `${src}/index.html`,
-      filename: 'index.html'
-    })
-  ]
+  plugins: []
 };
 
 if (isLegacy) {
   config.entry = entryLegacy;
   config.module.rules.push(babel);
+  config.plugins.push(cleanWebpackPlugin);
 } else {
   config.entry = entry;
-  config.plugins.push(cleanWebpackPlugin);
+  // Config.plugins.push(cleanCssLegacyWebpackPlugin);
 }
 
 module.exports = config;
