@@ -19,6 +19,7 @@
 - [Browsers Support](#browsers-support)
 - [Docs](#docs)
 
+
 ## Requirements
 To launch the application you need to install the followings applications:
 
