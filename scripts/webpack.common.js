@@ -1,5 +1,6 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { src, dist, isLegacy, env, configByEnv } = require('./get-setup');
 const entry = {
   vendor: ['lit-html', 'page', 'js-cookie'],
@@ -71,7 +72,13 @@ const config = {
       features: `${src}/features`
     }
   },
-  plugins: []
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Workshops',
+      template: `${src}/index.html`,
+      filename: 'index.html'
+    })
+  ]
 };
 
 if (isLegacy) {
