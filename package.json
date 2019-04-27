@@ -12,7 +12,6 @@
     "dev": "yarn && cross-env NODE_ENV=dev webpack --config scripts/webpack.dev.js && yarn dev:legacy",
     "dev:legacy": "cross-env NODE_ENV=dev webpack --config scripts/webpack.dev.js",
     "prod": "yarn prod:legacy && yarn && cross-env NODE_ENV=prod webpack --config scripts/webpack.prod.js",
-    "test-prod": "yarn && cross-env NODE_ENV=prod webpack --config scripts/webpack.prod.js",
     "prod:legacy": "cross-env NODE_ENV=prod webpack --config scripts/webpack.prod.js",
     "analyse": "cross-env NODE_ENV=prod webpack --config scripts/webpack.analyse.js",
     "test": "jest",

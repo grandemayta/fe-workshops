@@ -7,12 +7,12 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'source-map',
   output: {
-    chunkFilename: isLegacy ? 'chunks/[id].legacy.js' : 'chunks/[id].js',
-    filename: isLegacy ? 'index.legacy.js' : 'index.js'
+    chunkFilename: isLegacy ? 'chunks/[name].legacy.js' : 'chunks/[name].js',
+    filename: isLegacy ? '[name].legacy.js' : '[name].js'
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'index.css'
+      filename: 'style.css'
     })
   ]
 });
