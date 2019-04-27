@@ -6,7 +6,6 @@ cache:
 branches:
   only:
   - master
-  - gh-pages
 before-script: 
   - yarn
 script: 

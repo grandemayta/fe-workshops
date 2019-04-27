@@ -1,5 +1,5 @@
 # FE Courses
-[![Build Status](https://travis-ci.com/grandemayta/fe-courses.svg?token=4PzH6pSaVFrSFyxQY8Zz&branch=develop)](https://travis-ci.com/grandemayta/fe-courses)
+[![Build Status](https://travis-ci.com/grandemayta/fe-courses.svg?token=4PzH6pSaVFrSFyxQY8Zz&branch=master)](https://travis-ci.com/grandemayta/fe-courses)
 [![NPM version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0)](http://badge.fury.io/js/badge-list)
 [![made-with-javascript-doc](https://img.shields.io/badge/Made%20with-Javascript-1f425f.svg)](https://www.sphinx-doc.org/)
 
