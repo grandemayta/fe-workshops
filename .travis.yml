@@ -12,10 +12,11 @@ before-script:
 script: 
   - yarn prod
 before_deploy:
-  - cd dist
+  - cd ./dist
 deploy:
   provider: heroku
   skip_cleanup: true
+  github-token: "$GITHUB_TOKEN"
   api_key: 
     secure: $HEROKU_FE_COURSES_KEY
   app: workshops-fe-gm
