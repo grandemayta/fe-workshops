@@ -11,8 +11,8 @@ before-script:
 script: 
   - yarn prod
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  provider: heroku
   local_dir: ./dist
-  keep_history: true
+  api_key: 
+    secure: $HEROKU_FE_COURSES_KEY
+  app: workshops-fe-gm

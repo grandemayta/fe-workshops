@@ -40,7 +40,7 @@ const config = {
   },
   output: {
     path: dist,
-    publicPath: '/fe-courses/'
+    publicPath: ''
   },
   module: {
     rules: [
@@ -80,6 +80,8 @@ const config = {
 if (isLegacy) {
   config.entry = entryLegacy;
   config.module.rules.push(babel);
+  config.plugins.push(cleanWebpackPlugin);
+} else if (env === 'local') {
   config.plugins.push(cleanWebpackPlugin);
 } else {
   config.entry = entry;

@@ -7,21 +7,19 @@ const { src, dist } = require('./get-setup');
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    chunkFilename: `[id].js`,
-    filename: 'index.js'
+    chunkFilename: `[name].js`,
+    filename: '[name].js'
   },
   devtool: 'eval-source-map',
   devServer: {
     contentBase: dist,
     port: 3002,
-    publicPath: '/fe-courses',
     open: true,
-    openPage: 'fe-courses',
     historyApiFallback: true
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'index.css'
+      filename: 'style.css'
     }),
     new HtmlWebpackPlugin({
       title: 'Workshops',
