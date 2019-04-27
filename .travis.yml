@@ -16,3 +16,4 @@ deploy:
   api_key: 
     secure: $HEROKU_FE_COURSES_KEY
   app: workshops-fe-gm
+  
