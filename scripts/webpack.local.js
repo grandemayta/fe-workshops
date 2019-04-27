@@ -16,6 +16,7 @@ module.exports = merge(common, {
     port: 3002,
     publicPath: '/fe-courses',
     open: true,
+    openPage: 'fe-courses',
     historyApiFallback: true
   },
   plugins: [
