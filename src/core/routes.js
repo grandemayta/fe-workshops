@@ -2,7 +2,6 @@ import page from 'page';
 import { route } from './route';
 
 const routes = () => {
-  page.base('/fe-workshops');
   page('/', context => route('home/home', context));
   page('/signup', context => route('auth/signup/signup', context));
   page('/login', context => route('auth/login/login', context));
@@ -17,7 +16,7 @@ const routes = () => {
   page('/attendee/:userId/workshops', context =>
     route('attendee/workshops/workshops', context)
   );
-  page();
+  page({ hashbang: true });
 };
 
 export default routes;
