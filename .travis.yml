@@ -14,5 +14,4 @@ deploy:
   provider: surge
   domain: workshops-fe-gm.surge.sh
   project: ./dist
-  github_token: $GITHUB_TOKEN
   skip_cleanup: true
