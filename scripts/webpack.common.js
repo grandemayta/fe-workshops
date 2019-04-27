@@ -40,7 +40,7 @@ const config = {
   },
   output: {
     path: dist,
-    publicPath: '/fe-courses'
+    publicPath: '/fe-courses/'
   },
   module: {
     rules: [
