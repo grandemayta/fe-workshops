@@ -16,9 +16,9 @@ before_deploy:
 deploy:
   provider: heroku
   skip_cleanup: true
-  github-token: "$GITHUB_TOKEN"
   api_key: 
     secure: $HEROKU_FE_COURSES_KEY
   app: workshops-fe-gm
+  target_branch: master
   on:
     branch: heroku-app
