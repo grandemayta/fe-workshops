@@ -27,6 +27,13 @@ if (!isLegacy) {
       filename: 'index.html'
     })
   );
+  prodConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      title: '404',
+      template: `${src}/404.html`,
+      filename: '404.html'
+    })
+  );
 }
 
 module.exports = prodConfig;
