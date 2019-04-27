@@ -1,7 +1,8 @@
 import { setMessage } from 'helpers';
 import { setProgressBar } from 'helpers';
+import constants from 'config';
 
-const BASE_URL = 'http://localhost:1337';
+const BASE_URL = constants.api;
 
 export const config = (endpoint, params = {}) => {
   if (params.body) params.body = JSON.stringify(params.body);

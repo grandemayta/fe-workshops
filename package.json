@@ -82,7 +82,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "config$": "<rootDir>/config/config.jest.js",
+      "config$": "<rootDir>/config/config.local.js",
       "src(.*)$": "<rootDir>/src/$1",
       "assets(.*)$": "<rootDir>/src/assets/$1"
     },

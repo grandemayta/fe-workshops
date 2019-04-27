@@ -83,7 +83,6 @@ if (isLegacy) {
   config.plugins.push(cleanWebpackPlugin);
 } else {
   config.entry = entry;
-  // Config.plugins.push(cleanCssLegacyWebpackPlugin);
 }
 
 module.exports = config;

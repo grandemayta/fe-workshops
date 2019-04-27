@@ -1,3 +1,3 @@
 module.exports = {
-  message: 'This message arrive from config/config.local.js'
+  api: 'http://localhost:1337'
 };
