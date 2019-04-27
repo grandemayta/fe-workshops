@@ -12,7 +12,8 @@ script:
   - yarn prod
 deploy:
   provider: heroku
-  local_dir: ./dist
+  skip_cleanup: true
+  keep-history: true
   api_key: 
     secure: $HEROKU_FE_COURSES_KEY
   app: workshops-fe-gm
