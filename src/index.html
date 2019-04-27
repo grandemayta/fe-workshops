@@ -9,6 +9,13 @@
     <base href="/">
 </head>
 <body>
+    <script>
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+            history.replaceState(null, null, redirect);
+        }
+    </script>
     <app-header></app-header>
     <section id="root" class="main-wrapper"></section>
 

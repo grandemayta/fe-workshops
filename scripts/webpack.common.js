@@ -40,7 +40,7 @@ const config = {
   },
   output: {
     path: dist,
-    publicPath: ''
+    publicPath: env === 'local' ? '' : '/fe-courses/'
   },
   module: {
     rules: [
