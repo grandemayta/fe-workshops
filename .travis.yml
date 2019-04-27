@@ -6,19 +6,13 @@ cache:
 branches:
   only:
   - master
-  - heroku-app
 before-script: 
   - yarn
 script: 
   - yarn prod
-before_deploy:
-  - cd ./dist
 deploy:
-  provider: heroku
+  provider: pages
+  local_dir: ./dist
+  github_token: $GITHUB_TOKEN
   skip_cleanup: true
-  api_key: 
-    secure: $HEROKU_FE_COURSES_KEY
-  app: workshops-fe-gm
-  target_branch: master
-  on:
-    branch: heroku-app
+  keep_history: true
