@@ -14,8 +14,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: dist,
     port: 3002,
-    open: true,
-    historyApiFallback: true
+    open: true
   },
   plugins: [
     new MiniCssExtractPlugin({
