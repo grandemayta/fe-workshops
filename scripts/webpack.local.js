@@ -14,6 +14,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: dist,
     port: 3002,
+    publicPath: '/fe-courses',
     open: true,
     historyApiFallback: true
   },
