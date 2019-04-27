@@ -1,3 +1,3 @@
 module.exports = {
-  api: 'https://api-workshops.herokuapp.com/'
+  api: 'https://api-workshops.herokuapp.com'
 };
