@@ -2,6 +2,7 @@ import page from 'page';
 import { route } from './route';
 
 const routes = () => {
+  page.base('/fe-workshops');
   page('/', context => route('home/home', context));
   page('/signup', context => route('auth/signup/signup', context));
   page('/login', context => route('auth/login/login', context));
