@@ -16,7 +16,6 @@ const routes = () => {
   page('/attendee/:userId/workshops', context =>
     route('attendee/workshops/workshops', context)
   );
-  page({ hashbang: true });
 };
 
 export default routes;
