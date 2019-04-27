@@ -16,6 +16,7 @@ const routes = () => {
   page('/attendee/:userId/workshops', context =>
     route('attendee/workshops/workshops', context)
   );
+  page();
 };
 
 export default routes;
