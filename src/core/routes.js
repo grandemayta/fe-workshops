@@ -1,7 +1,7 @@
 import page from 'page';
 import { route } from './route';
 
-const routes = () => {
+export const routes = () => {
   page('/', context => route('home/home', context));
   page('/signup', context => route('auth/signup/signup', context));
   page('/login', context => route('auth/login/login', context));
@@ -18,5 +18,3 @@ const routes = () => {
   );
   page();
 };
-
-export default routes;
