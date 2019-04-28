@@ -11,7 +11,10 @@ before-script:
 script: 
   - yarn prod
 deploy:
-  provider: surge
-  domain: workshops-fe-gm.surge.sh
-  project: ./dist
+  provider: firebase
   skip_cleanup: true
+  token:
+    secure: $FIREBASE_TOKEN
+  project: workshops-fe-gm
+
+  
