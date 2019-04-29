@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
@@ -28,10 +29,8 @@ if (!isLegacy) {
     })
   );
   prodConfig.plugins.push(
-    new HtmlWebpackPlugin({
-      title: '404',
-      template: `${src}/404.html`,
-      filename: '404.html'
+    new ScriptExtHtmlWebpackPlugin({
+      module: '.min.js'
     })
   );
 }
