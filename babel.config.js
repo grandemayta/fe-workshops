@@ -9,6 +9,7 @@ module.exports = {
   ],
   plugins: [
     ["@babel/plugin-proposal-decorators", { decoratorsBeforeExport: false }],
+    '@babel/plugin-syntax-dynamic-import',
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-runtime"
   ]

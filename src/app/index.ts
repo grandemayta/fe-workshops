@@ -1,1 +1,1 @@
-import './components/greetings';
+import './core/bootstrap';
