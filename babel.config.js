@@ -1,28 +1,15 @@
-const presets = [
-  [
-    '@babel/preset-env',
-    {
+module.exports = {
+  presets: [
+    ['@babel/preset-env', {
       targets: {
         browsers: ['last 2 Chrome versions', 'safari >= 7']
-      },
-      exclude: ['transform-classes']
-    }
-  ]
-];
-
-module.exports = {
-  presets,
-  env: {
-    test: {
-      presets
-    },
-    prod: {
-      plugins: ['transform-remove-console']
-    }
-  },
+      }
+    }],
+    '@babel/typescript'
+  ],
   plugins: [
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-transform-runtime'
+    ["@babel/plugin-proposal-decorators", { decoratorsBeforeExport: false }],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime"
   ]
 };

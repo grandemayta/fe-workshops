@@ -1,18 +1,33 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const argv = require('minimist')(process.argv.slice(2));
+const path = require('path');
 const merge = require('webpack-merge');
+const polyfills = require('./polyfills');
 const common = require('./webpack.common');
-const { isLegacy } = require('./get-setup');
+const dist = path.resolve(__dirname, '../dist');
 
-module.exports = merge(common, {
+const webpackDevConfig = merge(common, {
   mode: 'development',
   devtool: 'source-map',
   output: {
-    chunkFilename: isLegacy ? 'chunks/[name].legacy.js' : 'chunks/[name].js',
-    filename: isLegacy ? '[name].legacy.js' : '[name].js'
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style.css'
-    })
-  ]
+    path: dist,
+    filename: '[name].js'
+  }
 });
+
+if (argv['legacy']) {
+  webpackDevConfig.entry.polyfills = polyfills;
+  webpackDevConfig.plugins.push(new CopyPlugin([
+    {
+      from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+      to: `${dist}/webcomponents-loader.js`
+    },
+    {
+      from: 'node_modules/@webcomponents/webcomponentsjs/bundles/*.js',
+      to: `${dist}/bundles/`,
+      flatten: true
+    }
+  ]));
+}
+
+module.exports = webpackDevConfig;

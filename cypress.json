@@ -1,7 +1,0 @@
-{
-    "integrationFolder": "src",
-    "fixturesFolder": false,
-    "pluginsFile": false,
-    "supportFile": false,
-    "ignoreTestFiles": "!*.e2e.js"
-}

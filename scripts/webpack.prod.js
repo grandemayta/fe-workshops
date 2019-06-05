@@ -1,38 +1,41 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const argv = require('minimist')(process.argv.slice(2));
+const UglifyJS = require("uglify-es");
+const path = require('path');
 const merge = require('webpack-merge');
+const polyfills = require('./polyfills');
 const common = require('./webpack.common');
-const { src, isLegacy } = require('./get-setup');
+const dist = path.resolve(__dirname, '../dist');
 
-const prodConfig = merge(common, {
+const webpackProdConfig = merge(common, {
   mode: 'production',
   output: {
-    chunkFilename: isLegacy ? 'legacy/[name].legacy.min.js' : '[name].[chunkhash].min.js',
-    filename: isLegacy ? '[name].legacy.min.js' : '[name].[chunkhash].min.js'
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style.[chunkhash].min.css'
-    }),
-    new OptimizeCssAssetsPlugin()
-  ]
+    path: dist,
+    filename: '[name].min.js'
+  }
 });
 
-if (!isLegacy) {
-  prodConfig.plugins.push(
-    new HtmlWebpackPlugin({
-      title: 'Workshops',
-      template: `${src}/index.html`,
-      filename: 'index.html'
-    })
-  );
-  prodConfig.plugins.push(
-    new ScriptExtHtmlWebpackPlugin({
-      module: '.min.js'
-    })
+if (argv['legacy']) {
+  webpackProdConfig.entry.polyfills = polyfills;
+  webpackProdConfig.plugins.push(
+    new CopyPlugin([
+      {
+        from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js',
+        to: `${dist}/webcomponents-loader.js`,
+        transform: function (content) {
+          return UglifyJS.minify(content.toString()).code;
+        }
+      },
+      {
+        from: 'node_modules/@webcomponents/webcomponentsjs/bundles/*.js',
+        to: `${dist}/bundles/`,
+        flatten: true,
+        transform: function (content) {
+          return UglifyJS.minify(content.toString()).code;
+        }
+      }
+    ]),
   );
 }
 
-module.exports = prodConfig;
+module.exports = webpackProdConfig;

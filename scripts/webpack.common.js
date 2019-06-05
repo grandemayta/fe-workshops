@@ -1,30 +1,13 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { src, dist, isLegacy, env, configByEnv } = require('./get-setup');
-const entry = {
-  vendor: ['js-cookie', 'page', 'lit-html'],
-  bundle: `${src}/index.js`
-};
-const entryLegacy = {
-  vendor: entry.vendor,
-  bundle: ['core-js/fn/promise', entry.bundle]
-};
+const path = require('path');
+const src = path.resolve(__dirname, '../src');
+const dist = path.resolve(__dirname, '../dist');
 
-const cleanWebpackPlugin = new CleanWebpackPlugin({
-  root: process.cwd(),
-  verbose: true,
-  dry: false,
-  cleanOnceBeforeBuildPatterns: [dist],
-  cleanAfterEveryBuildPatterns: [`${dist}/*.css`]
-});
-
-const babel = {
-  test: /\.js$/,
-  loader: 'babel-loader',
-  exclude: /node_modules/
-};
-
-const config = {
+module.exports = {
+  entry: {
+    vendor: ['lit-element'],
+    bundle: `${src}/app/index.ts`
+  },
   optimization: {
     splitChunks: {
       maxAsyncRequests: 1,
@@ -38,53 +21,30 @@ const config = {
       }
     }
   },
-  output: {
-    path: dist,
-    publicPath: ''
-  },
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        test: /\.ts?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
-        test: /\.(jpg|png|gif|eot|woff|ttf|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: env === 'local' ? '' : '/assets',
-          outputPath: env === 'local' ? '' : '/assets'
-        },
-        exclude: /node_modules/
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        include: /lit/,
+        exclude: /webcomponentsjs/
       }
     ]
   },
   resolve: {
-    modules: ['node_modules', 'src', 'fixtures'],
-    alias: {
-      config: configByEnv,
-      src: `${src}`,
-      assets: `${src}/assets`,
-      core: `${src}/core`,
-      services: `${src}/services`,
-      polyfills: `${src}/polyfills`,
-      helpers: `${src}/helpers`,
-      components: `${src}/components`,
-      features: `${src}/features`
-    }
+    extensions: ['.ts', '.js'],
+    modules: ['node_modules', 'src']
   },
-  plugins: []
+  plugins: [
+    new CleanWebpackPlugin([dist], {
+      root: process.cwd(),
+      verbose: true,
+      dry: false
+    })
+  ]
 };
-
-if (isLegacy) {
-  config.entry = entryLegacy;
-  config.module.rules.push(babel);
-  config.plugins.push(cleanWebpackPlugin);
-} else if (env === 'local') {
-  config.plugins.push(cleanWebpackPlugin);
-} else {
-  config.entry = entry;
-}
-
-module.exports = config;

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "target": "es5",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2018",
+      "dom"
+     ]
+  },
+  "include": [
+      "src"
+  ]
+}
