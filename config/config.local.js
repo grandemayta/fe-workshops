@@ -1,4 +1,4 @@
 module.exports = {
-  api: 'http://localhost:1337'
-  // Api: 'https://api-workshops.herokuapp.com'
+  // Api: 'http://localhost:1337'
+  api: 'https://api-workshops.herokuapp.com'
 };
