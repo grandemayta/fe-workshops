@@ -1,15 +1,24 @@
-import { html, render } from 'lit-html';
-import { workshopById } from 'services';
+import { customElement, html, LitElement, property } from 'lit-element';
+import { page } from '../../../helpers';
+import { workshopById } from '../../../services/index';
 
-export default class Detail {
-  constructor(el, params) {
-    this.el = el;
-    this.params = params;
-    this.params.title('Workshop detail');
+@customElement('app-courses-detail')
+class CoursesDetail extends LitElement {
+  @property({ type: Object }) private params;
+  @property({ type: Object }) private data;
+
+  public async firstUpdated() {
+    this.data = await workshopById(this.params.id);
   }
 
-  template(data) {
-    const { title, description, technology, author, date, time } = data;
+  public render() {
+    console.log(this.params);
+    if (!this.data) {
+      return html`
+        <h2>Loading...</h2>
+      `;
+    }
+    const { title, description, technology, author, date, time } = this.data;
     const name = `${author.firstname} ${author.lastname}`;
     const { id: workshopId, userSession } = this.params;
 
@@ -41,9 +50,6 @@ export default class Detail {
       </div>
     `;
   }
-
-  async load() {
-    const data = await workshopById(this.params.id);
-    render(this.template(data), this.el);
-  }
 }
+
+export default CoursesDetail;

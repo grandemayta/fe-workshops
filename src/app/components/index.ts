@@ -1,1 +1,2 @@
-import './greetings/greetings';
+import './tile-course/tile-course';
+import './tiles-courses/tiles-courses';

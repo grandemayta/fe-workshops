@@ -2,8 +2,8 @@
   "name": "my-webcomponents",
   "version": "1.0.0",
   "author": {
-    "name": "Marco Masciulli",
-    "email": "m.uilli@caimano.it"
+    "name": "Gabriel Mayta",
+    "email": "grandemayta@gmail.com"
   },
   "scripts": {
     "pretest": "eslint . --fix",
@@ -20,7 +20,7 @@
     "custom-event-polyfill": "^1.0.7",
     "intersection-observer": "^0.7.0",
     "js-cookie": "^2.2.0",
-    "lit-element": "^2.0.1",
+    "lit-element": "^2.1.0",
     "page": "^1.11.4",
     "whatwg-fetch": "^3.0.0"
   },

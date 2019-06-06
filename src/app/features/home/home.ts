@@ -8,8 +8,9 @@ class Home extends LitElement {
 
   public render() {
     return html`
-      <app-greetings fullname="Charlotte"></app-greetings>
-      <a href="/contacts">Contacts</a>
+      <div class="container">
+        <app-tiles-courses type="all"></app-tiles-courses>
+      </div>
     `;
   }
 }

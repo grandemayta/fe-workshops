@@ -1,12 +1,10 @@
-import { getUserSession } from '../helpers';
+import { getUserSession } from '../helpers/index';
 
-export const route = (name, context) => {
-  const path = `${name}/${name}`;
-  import(`../features/${path}`).then(({ default: Feature }) => {
+export const route = (name: string, path: string, context: any) => {
+  import(`../features/${path}`).then(() => {
     context.params.userSession = getUserSession();
-    const el = document.querySelector('#root');
-    el.innerHTML = `<app-${name}></app-${name}>`;
-    const feature = new Feature(context.params);
-    feature.render();
+    const params = JSON.stringify(context.params);
+    const appMainEl = document.querySelector('app-main#root');
+    appMainEl.innerHTML = `<app-${name} params=${params}></app-${name}>`;
   });
 };
