@@ -1,10 +1,8 @@
-import { customElement, html, LitElement } from 'lit-element';
+import { customElement, html, LitElement, property } from 'lit-element';
 
 @customElement('app-home')
 class Home extends LitElement {
-  constructor() {
-    super();
-  }
+  @property({ type: Object }) private params;
 
   public render() {
     return html`

@@ -1,4 +1,4 @@
-import { getUserSession } from '../helpers/index';
+import { getUserSession } from 'helpers/module';
 
 export const route = (name: string, path: string, context: any) => {
   import(`../features/${path}`).then(() => {

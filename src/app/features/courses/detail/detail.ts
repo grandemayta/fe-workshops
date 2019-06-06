@@ -1,6 +1,5 @@
 import { customElement, html, LitElement, property } from 'lit-element';
-import { page } from '../../../helpers';
-import { workshopById } from '../../../services/index';
+import { workshopById } from 'services/module';
 
 @customElement('app-courses-detail')
 class CoursesDetail extends LitElement {

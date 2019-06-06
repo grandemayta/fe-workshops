@@ -3,7 +3,7 @@ import {
   workshops,
   workshopsByHashtag,
   workshopsBySpeaker
-} from '../../services/index';
+} from 'services/module';
 
 @customElement('app-tiles-courses')
 class TilesCourses extends LitElement {

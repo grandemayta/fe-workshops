@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "services/*": ["src/app/services/*"],
+      "helpers/*": ["src/app/helpers/*"]
+    },
     "module": "esnext",
     "target": "es5",
     "moduleResolution": "node",

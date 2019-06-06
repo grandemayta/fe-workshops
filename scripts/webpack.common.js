@@ -38,7 +38,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
-    modules: ['node_modules', 'src']
+    modules: ['node_modules', 'src'],
+    alias: {
+      services: `${src}/app/services`,
+      helpers: `${src}/app/helpers`
+    }
   },
   plugins: [
     new CleanWebpackPlugin([dist], {
