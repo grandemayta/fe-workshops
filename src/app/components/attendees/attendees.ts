@@ -1,62 +1,56 @@
-import { html, render } from 'lit-html';
-import { repeat } from 'lit-html/directives/repeat';
-import { setMessage } from 'helpers';
+import { customElement, html, LitElement, property } from 'lit-element';
 import {
-  workshopAttendees,
   addAttendeeToWorkshop,
-  removeAttendeeFromWorkshop
-} from 'services';
+  removeAttendeeFromWorkshop,
+  workshopAttendees
+} from 'services/module';
 
-export default class Attendees extends HTMLElement {
-  get workshopId() {
-    return this.getAttribute('workshop-id');
-  }
+@customElement('app-attendees')
+class Attendees extends LitElement {
+  @property({ type: String }) private workshopId;
+  @property({ type: String }) private attendeeId;
+  @property({ type: Array }) private attendees;
 
-  get attendeeId() {
-    return this.getAttribute('attendee-id');
-  }
-
-  async onAddRemoveAttendee(e, action = 'add') {
+  public async onAddRemoveAttendee(e, action = 'add') {
     e.preventDefault();
     let response = null;
     if (action === 'add') {
       response = await addAttendeeToWorkshop(this.workshopId, this.attendeeId);
     } else {
-      response = await removeAttendeeFromWorkshop(this.workshopId, this.attendeeId);
+      response = await removeAttendeeFromWorkshop(
+        this.workshopId,
+        this.attendeeId
+      );
     }
-    setMessage(response.message);
-    this.load();
   }
 
-  connectedCallback() {
-    this.load();
-  }
-
-  async load() {
-    let attendees = await workshopAttendees(this.workshopId);
+  public async firstUpdated() {
+    this.attendees = await workshopAttendees(this.workshopId);
     let canSubscribe = true;
-    attendees = attendees.map(attendee => {
+    this.attendees = this.attendees.map(attendee => {
       if (this.attendeeId === attendee.id) {
         attendee.canUnsubscribe = true;
         canSubscribe = false;
       }
       return attendee;
     });
-    render(this.template(attendees, canSubscribe), this);
   }
 
-  addAttendeeeTemplate() {
+  public addAttendeeeTemplate() {
     return html`
       <hr />
       <p class="buttons is-centered">
-        <a @click=${e => this.onAddRemoveAttendee(e)} class="button is-link is-medium">
+        <a
+          @click=${e => this.onAddRemoveAttendee(e)}
+          class="button is-link is-medium"
+        >
           Subscribe
         </a>
       </p>
     `;
   }
 
-  removeAttendeeeTemplate() {
+  public removeAttendeeeTemplate() {
     this.canAddParticipate = false;
     return html`
       <span
@@ -68,11 +62,11 @@ export default class Attendees extends HTMLElement {
     `;
   }
 
-  template(attendees, canSubscribe) {
+  public template(attendees, canSubscribe) {
     const checkAttendeeId = this.attendeeId !== 'undefined';
     return html`
       <div class="box">
-        ${repeat(attendees, attendee => {
+        ${this.attendees.map(attendee => {
           const { firstname, lastname, avatar, canUnsubscribe } = attendee;
           return html`
             <article class="media custom-attendees-media">
@@ -96,6 +90,15 @@ export default class Attendees extends HTMLElement {
       </div>
     `;
   }
+
+  public render() {
+    if (!this.attendees) {
+      return html`
+        <h2>Loading...</h2>
+      `;
+    }
+    return this.template(this.attendees, this.canSubscribe);
+  }
 }
 
-customElements.define('app-attendees', Attendees);
+export default Attendees;

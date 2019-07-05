@@ -23,7 +23,6 @@ class CoursesDetail extends LitElement {
 
     return html`
       <div class="container">
-        <app-alert status message></app-alert>
         <div class="columns">
           <div class="column is-8">
             <h3 class="title is-3">${title}</h3>
@@ -41,8 +40,8 @@ class CoursesDetail extends LitElement {
           <div class="column is-4">
             <h4 class="title is-4">Attendees</h4>
             <app-attendees
-              workshop-id=${workshopId}
-              attendee-id=${userSession && userSession.id}
+              workshopId=${workshopId}
+              attendeeId=${userSession && userSession.id}
             ></app-attendees>
           </div>
         </div>
